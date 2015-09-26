@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"  
+      	xmlns:p="http://primefaces.prime.com.tr/ui"        
+      	xmlns:c="http://java.sun.com/jsp/jstl/core"
+      	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <title>BestSeller Admin | Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"></link>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
+    <!-- iCheck -->
+    <link rel="stylesheet" href="js/iCheck/square/blue.css"></link>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="index2.html"><b>BestSeller</b>Admin</a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Logue para começar sua sessão</p>
+        
+        <h:form>
+        	<div class="form-group has-feedback">
+       			<h:inputText styleClass="form-control" a:placeholder="Login" value="#{adminBean.admin.login}"></h:inputText>           	
+          </div>
+          <div class="form-group has-feedback">
+          		<h:inputSecret type="password" styleClass="form-control" a:placeholder="Senha" value="#{adminBean.admin.senha}"></h:inputSecret>
+          </div>
+          <div class="row">            
+            <div class="col-xs-4">
+           		<h:commandButton value="Logar" action="#{adminBean.logar}" styleClass="btn btn-primary btn-block btn-flat" />              
+            </div>
+          </div>          
+        </h:form>
+        
+        <a href="#">Esqueci minha senha</a><br />
+        <a href="cadastro.jsf" class="text-center">Cadastre-se</a>
+
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="js/iCheck/icheck.min.js"></script>
+    <script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
+  </body>
+</html>
