@@ -1,5 +1,8 @@
 package br.com.bestseller.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -10,11 +13,15 @@ import br.com.bestseller.model.Usuario;
 @SessionScoped
 public class AdminBean {
 	private Usuario admin;
-	private UsuarioDAO usuarioDAO;
+	private UsuarioDAO adminDAO;
+	private String mensagem;
+	private List<Usuario> listaAdmin;	
 
 	public AdminBean() {
 		this.admin = new Usuario();
-		this.usuarioDAO = new UsuarioDAO();
+		this.adminDAO = new UsuarioDAO();
+		this.mensagem = "";
+		this.listaAdmin = new ArrayList<Usuario>();
 	}
 
 	public Usuario getAdmin() {
@@ -24,7 +31,31 @@ public class AdminBean {
 	public void setAdmin(Usuario admin) {
 		this.admin = admin; 
 	}
-	
+		
+	public UsuarioDAO getAdminDAO() {
+		return adminDAO;
+	}
+
+	public void setAdminDAO(UsuarioDAO adminDAO) {
+		this.adminDAO = adminDAO;
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+
+	public List<Usuario> getListaAdmin() {
+		return listaAdmin;
+	}
+
+	public void setListaAdmin(List<Usuario> listaAdmin) {
+		this.listaAdmin = listaAdmin;
+	}
+
 	public String cadastrar()
 	{
 		try {
@@ -36,11 +67,30 @@ public class AdminBean {
 					|| admin.getSenha().isEmpty()
 					|| admin.getNome() == null
 					|| admin.getNome().isEmpty()) {
+				
+				this.mensagem = "Campo inválido";
+				
 				return "CadastrarAdmin";
 			}
 			
-			/// Cadastra o usuário
-			admin = this.usuarioDAO.save(admin);
+			this.admin.setIsAdmin("S");
+			
+			if (admin.getId() == 0) {
+				
+				admin = this.adminDAO.save(admin);
+				
+				this.mensagem = "Cadastro realizado com sucesso";
+			}
+			else {				
+				
+				if (adminDAO.update(admin)) {
+					this.mensagem = "Atualização realizado com sucesso";
+				}
+				else
+				{
+					this.mensagem = "Atualização falhou";	
+				}
+			}
 			
 			return "CadastrarAdmin";
 			
@@ -57,33 +107,98 @@ public class AdminBean {
 			if ((admin.getLogin() == null || admin.getLogin().isEmpty())
 					|| admin.getSenha() == null
 					|| admin.getSenha().isEmpty()) {
+				
+				this.mensagem = "Preencha todos os campos.";
+				
 				return "login";
 			}
 			
 			/// Bucar usuário
-			admin = this.usuarioDAO.get(admin.getLogin(),
+			admin = this.adminDAO.get(admin.getLogin(),
 					admin.getSenha());
 			
-			if (admin.getIsAdmin() == 'S') {
+			if (admin == null) {
+				
+				this.mensagem = "Senha/Login Inválido";
+				
+				admin = new Usuario();
+				
+				return "login";
+			}
+			
+			if (admin.getIsAdmin().equals("S")) {
 				return "home";
 			}
 			else
 			{
+				this.mensagem = "Sem permissão de acesso.";
+				
 				return "login";
 			}
 			
 			
 
 		} catch (Exception e) {
-			return "login";
+			e.printStackTrace();
 		}
+		
+		return null;
 
 	}
 
 	public String deslogar()
 	{
-		this.admin = null;
+		this.mensagem = "";
+		
+		this.admin = new Usuario();
 		
 		return "login";		
+	}
+
+	public String carregarEdicao(Usuario admin)
+	{
+		try {
+			
+			this.admin = admin;
+			
+			return "CadastrarAdmin";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public String deletarItem(Usuario admin){
+		try {
+			
+			/// Remove item
+			adminDAO.delete(admin);
+			
+			/// Mensagem de exclusao efetuada
+			mensagem = "Exclusão realizada com sucesso.";
+					
+			this.listar();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return null;
+	}
+	
+	public String listar(){
+		try {
+			
+			this.mensagem = "";
+			
+			listaAdmin = this.adminDAO.getAll();			
+			
+			return "ListarAdmin";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "home";
+		}
 	}
 }

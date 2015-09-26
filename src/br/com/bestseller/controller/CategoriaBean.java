@@ -58,11 +58,13 @@ public class CategoriaBean implements Serializable {
 
 			// / Validar dados de cadastro
 			if (categoria.getNome() == null || categoria.getNome().isEmpty()) {
+				this.mensagem = "Campo inválido";
 				return "cadastrar";
 			}
 
 			// / Cadastrar categoria
 			categoria = this.categoriaDAO.save(categoria);
+			this.mensagem = "Cadastro realizado com sucesso";
 
 			this.listar();
 
@@ -91,7 +93,8 @@ public class CategoriaBean implements Serializable {
 	public String habilitarEdicao(Categoria categoria){
 		try {
 			categoria.setEditable(true);
-			return "ListarCategoria";
+			return "ListarCategoria";			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	

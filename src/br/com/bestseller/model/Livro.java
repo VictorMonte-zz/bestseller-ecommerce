@@ -1,18 +1,19 @@
 package br.com.bestseller.model;
 
-import java.util.Date;
-
 public class Livro {
 	private int id;
 	private String titulo;
 	private String isbn;
 	private String edicao;
 	private String volume;
-	private Date dataPublicacao;
-	private String localPublicacao;
+	private String dataPublicacao;
+	private String localPublicacao;	
+	private int idadeRecomendada;
+	private String capa;
 	private int autor;
 	private int editora;
 	private int categoria;
+	private boolean editable;
 
 	public Livro() {
 	}
@@ -57,11 +58,11 @@ public class Livro {
 		this.volume = volume;
 	}
 
-	public Date getDataPublicacao() {
+	public String getDataPublicacao() {
 		return dataPublicacao;
 	}
 
-	public void setDataPublicacao(Date dataPublicacao) {
+	public void setDataPublicacao(String dataPublicacao) {
 		this.dataPublicacao = dataPublicacao;
 	}
 
@@ -96,5 +97,32 @@ public class Livro {
 	public void setCategoria(int categoria) {
 		this.categoria = categoria;
 	}
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
+
+	public int getIdadeRecomendada() {
+		return idadeRecomendada;
+	}
+
+	public void setIdadeRecomendada(int idadeRecomendada) {
+		this.idadeRecomendada = idadeRecomendada;
+	}
+
+	public String getCapa() {
+		return capa;
+	}
+
+	public void setCapa(String capa) {
+		this.capa = capa;
+	}
+	
+	
+	
 
 }

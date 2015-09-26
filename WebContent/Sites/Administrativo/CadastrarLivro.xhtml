@@ -32,7 +32,7 @@
 		<header class="main-header">
 
 			<!-- Logo -->
-			<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="home.jsf" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>ADM</b></span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg"><b>BestSeller</b>Admin</span>
 			</a>
@@ -120,22 +120,65 @@
 				<!-- Sidebar Menu -->
 				<h:form>
 					<ul class="sidebar-menu">
-						<li class="header">Menu</li>			            
-		            	<li><a href="home.jsf"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>		            	            
+						<li class="header">Menu</li>
+			            <li>
+			            	<h:link outcome="home">
+			            		<i class="fa fa-dashboard"></i> <span>Home</span>
+			            	</h:link>			            	
+		            	</li>			            
 						<li class="treeview">
 							<a href="#"><i class="fa fa-book"></i>
 								<span>Livro</span> 
 								<i class="fa fa-angle-left pull-right"></i>
 							</a>
-							<ul class="treeview-menu">
-								<li><a href="#">Buscar</a></li>
-								<li><h:link value="Cadastro" outcome="cadastro" ></h:link> </li>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{livroBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:commandLink action="#{livroBean.carregarCadastro}" value="Cadastrar" /> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-table"></i>
+								<span>Categoria</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{categoriaBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarCategoria" ></h:link> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-cubes"></i>
+								<span>Editora</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{editoraBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarEditora" ></h:link> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-pencil"></i>
+								<span>Autor</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{autorBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarAutor" ></h:link> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-users"></i>
+								<span>Usuários</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{adminBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarAdmin" ></h:link> </li>
 							</ul>
 						</li>
 					</ul>
 				</h:form>
 				<!-- /.sidebar-menu -->
-				
 			</section>
 			<!-- /.sidebar -->
 		</aside>
@@ -169,49 +212,71 @@
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Nome do Livro"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="Nome"></h:inputText>
+										<h:inputText styleClass="form-control" a:placeholder="Nome" value="#{livroBean.livro.titulo}"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="ISBN"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="ISBN"></h:inputText>
+										<h:inputText styleClass="form-control" a:placeholder="ISBN" value="#{livroBean.livro.isbn}"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Edição"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="Edição"></h:inputText>
+										<h:inputText styleClass="form-control" a:placeholder="Edição" value="#{livroBean.livro.edicao}"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Volume"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="Volume"></h:inputText>
+										<h:inputText styleClass="form-control" a:placeholder="Volume" value="#{livroBean.livro.volume}"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Data de Publicação"></h:outputLabel>
 										<h:inputText styleClass="form-control"
-											a:placeholder="Data de Publicação"></h:inputText>
+											a:placeholder="Data de Publicação" value="#{livroBean.livro.dataPublicacao}"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Local de Publicação"></h:outputLabel>
 										<h:inputText styleClass="form-control"
-											a:placeholder="Local de Publicação"></h:inputText>
+											a:placeholder="Local de Publicação" value="#{livroBean.livro.localPublicacao}"></h:inputText>
+									</div>
+									<div class="form-group">
+										<h:outputLabel value="Idade Recomendada"></h:outputLabel>
+										<h:inputText styleClass="form-control"
+											a:placeholder="Idade Recomendada" value="#{livroBean.livro.idadeRecomendada}"></h:inputText>
+									</div>
+									<div class="form-group">
+										<h:outputLabel value="Código da Capa"></h:outputLabel>
+										<h:selectOneMenu value="#{livroBean.livro.capa}" styleClass="form-control" style="width:100%">
+										   	<f:selectItem itemValue="1" itemLabel="A dança dos Dragões" />
+										   	<f:selectItem itemValue="2" itemLabel="Harry Potter 1" />
+										   	<f:selectItem itemValue="3" itemLabel="The book of Threes" />
+										   	<f:selectItem itemValue="4" itemLabel="Lord of the king: The return of the King" />
+										</h:selectOneMenu>																													
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Autor"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="Autor"></h:inputText>
+										<h:selectOneMenu styleClass="form-control" style="width:100%" value="#{livroBean.livro.autor}">
+    										<f:selectItems value="#{livroBean.listaAutor}" var="autor" itemValue="#{autor.id}" itemLabel="#{autor.nome}" />
+										</h:selectOneMenu>										
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Editora"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="Editora"></h:inputText>
+										<h:selectOneMenu styleClass="form-control" style="width:100%" value="#{livroBean.livro.editora}">
+    										<f:selectItems value="#{livroBean.listaEditora}" var="editora" itemValue="#{editora.id}" itemLabel="#{editora.nome}" />
+										</h:selectOneMenu>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Categoria"></h:outputLabel>
-										<h:inputText styleClass="form-control"
-											a:placeholder="Categoria"></h:inputText>
+										<h:selectOneMenu styleClass="form-control" style="width:100%" value="#{livroBean.livro.categoria}">
+    										<f:selectItems value="#{livroBean.listaCategoria}" var="categoria" itemValue="#{categoria.id}" itemLabel="#{categoria.nome}" />
+										</h:selectOneMenu>
 									</div>
 								</div>
 
 								<div class="box-footer">
 									<div class="pull-right">
-										<h:commandButton value="Salvar" styleClass="btn btn-primary" />
+										<h:commandButton value="Salvar" styleClass="btn btn-primary" action="#{livroBean.cadastrar}" />
 									</div>
+									<c:if test="#{livroBean.mensagem != ''}">
+										<h:outputText value="#{livroBean.mensagem}"></h:outputText>
+									</c:if>	
 								</div>
 							</h:form>
 						</div>

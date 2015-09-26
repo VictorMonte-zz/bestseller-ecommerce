@@ -54,11 +54,16 @@ public class EditoraBean implements Serializable {
 	
 	public String cadastrar() {
 		try {
-			if (editora.getTipo() == null || editora.getTipo().isEmpty()
+			if (editora.getNome() == null
+					|| editora.getNome().isEmpty()
+					|| editora.getTipo() == null 
+					|| editora.getTipo().isEmpty()
 					|| editora.getGenero() == null
 					|| editora.getGenero().isEmpty()
-					|| editora.getFundacao() == null					
-					|| editora.getSede() == null || editora.getSede().isEmpty()
+					|| editora.getFundacao() == null							
+					|| editora.getFundacao().isEmpty()
+					|| editora.getSede() == null 
+					|| editora.getSede().isEmpty()
 					|| editora.getProprietario() == null
 					|| editora.getProprietario().isEmpty()
 					|| editora.getProdutos() == null
@@ -66,13 +71,21 @@ public class EditoraBean implements Serializable {
 					|| editora.getSiteOficial() == null
 					|| editora.getSiteOficial().isEmpty()
 					|| editora.getContato() == null
-					|| editora.getContato().isEmpty()
+					|| editora.getContato().isEmpty()					
+					|| editora.getFundacao() == null
+					|| editora.getFundacao().isEmpty()
 					|| editora.getPessoasChave() == null
 					|| editora.getPessoasChave().isEmpty()) {
+				
+				
+				this.mensagem = "Campo inválido";
+						
 				return "CadastrarEditora";
 			}
 
 			editora = editoraDAO.save(editora);
+			
+			this.mensagem = "Cadastro realizado";
 
 			return "CadastrarEditora";
 
@@ -85,6 +98,8 @@ public class EditoraBean implements Serializable {
 
 	public String listar() {
 		try {
+			this.mensagem = "";
+			
 			listaEditora = editoraDAO.getAll();
 
 			return "ListarEditora";

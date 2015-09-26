@@ -4,7 +4,7 @@ public class Categoria {
 	private int id;
 	private String nome;
 	
-	boolean editable;
+	private boolean editable;
 	
 	public int getId() {
 		return id;

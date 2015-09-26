@@ -177,18 +177,20 @@
 					</ul>
 				</h:form>
 				<!-- /.sidebar-menu -->
+
 			</section>
+			<!-- /.sidebar -->
 		</aside>
-		
+
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Editora <small>Verifique aqui todas editora cadastradas</small>
+					Autor <small>Verifique aqui todas autor cadastradas</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Editora</a></li>
+					<li><a href="#"><i class="fa fa-dashboard"></i> Autor</a></li>
 					<li class="active">Busca</li>
 				</ol>
 			</section>
@@ -196,98 +198,68 @@
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-md-6">
 						<div class="box">
 							<div class="box-header with-border">
-								<h3 class="box-title">Tabela de Editoras</h3>
+								<h3 class="box-title">Tabela de Categorias</h3>
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
-								<c:if test="#{empty editoraBean.listaEditora}">
+								<c:if test="#{empty autorBean.listaAutor}">
 									<div class="panel panel-default">
 									  <div class="panel-body">
-									    <h:outputText rendered="#{empty editoraBean.listaEditora}" value="Nenhuma editora cadastrada!"></h:outputText>
+									    <h:outputText rendered="#{empty autorBean.listaAutor}" value="Nenhuma autor cadastrada!"></h:outputText>
 									  </div>
 									</div>			
 								</c:if>					
 								<h:form>
-									<h:dataTable value="#{editoraBean.listaEditora}" var="editora" styleClass="table table-bordered"
-									rendered="#{not empty editoraBean.listaEditora}">
-										<!-- <h:column>
+									<h:dataTable value="#{autorBean.listaAutor}" var="autor" styleClass="table table-bordered"
+									rendered="#{not empty autorBean.listaAutor}">
+										<h:column>
 											<f:facet name="header">ID</f:facet>
-	    									<h:outputText value="#{editora.id}"/>
-										</h:column> -->
+	    									<h:outputText value="#{autor.id}"/>
+										</h:column>
 										<h:column>
 											<f:facet name="header">Nome</f:facet>										
-											<h:inputText value="#{editora.nome}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.nome}" rendered="#{not editora.editable}" />
+											<h:inputText value="#{autor.nome}" rendered="#{autor.editable}" />    				
+	    									<h:outputText value="#{autor.nome}" rendered="#{not autor.editable}" />
 										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Tipo</f:facet>										
-											<h:inputText value="#{editora.tipo}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.tipo}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
+										<h:column>
+											<f:facet name="header">Data de Nascimento</f:facet>										
+											<h:inputText value="#{autor.nascimento}" rendered="#{autor.editable}" />    				
+	    									<h:outputText value="#{autor.nascimento}" rendered="#{not autor.editable}" />
+										</h:column>	
+										<h:column>
+											<f:facet name="header">Idioma</f:facet>										
+											<h:inputText value="#{autor.idioma}" rendered="#{autor.editable}" />    				
+	    									<h:outputText value="#{autor.idioma}" rendered="#{not autor.editable}" />
+										</h:column>	
+										<h:column>
 											<f:facet name="header">Genêro</f:facet>										
-											<h:inputText value="#{editora.genero}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.genero}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
-											<f:facet name="header">Data de Fundação</f:facet>										
-											<h:inputText value="#{editora.fundacao}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.fundacao}" rendered="#{not editora.editable}" />
-										</h:column> -->
+											<h:inputText value="#{autor.genero}" rendered="#{autor.editable}" />    				
+	    									<h:outputText value="#{autor.genero}" rendered="#{not autor.editable}" />
+										</h:column>	
 										<h:column>
-											<f:facet name="header">Sede</f:facet>										
-											<h:inputText value="#{editora.sede}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.sede}" rendered="#{not editora.editable}" />
-										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Proprietário</f:facet>										
-											<h:inputText value="#{editora.proprietario}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.proprietario}" rendered="#{not editora.editable}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Pessoas-Chave</f:facet>										
-											<h:inputText value="#{editora.pessoasChave}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.pessoasChave}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
-											<f:facet name="header">Produtos</f:facet>										
-											<h:inputText value="#{editora.produtos}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.produtos}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<h:column>
-											<f:facet name="header">Contato</f:facet>										
-											<h:inputText value="#{editora.contato}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.contato}" rendered="#{not editora.editable}" />
-										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Faturamento</f:facet>										
-											<h:inputText value="#{editora.faturamento}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.faturamento}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<h:column>
-											<f:facet name="header">Site Oficial</f:facet>										
-											<h:inputText value="#{editora.siteOficial}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.siteOficial}" rendered="#{not editora.editable}" />
-										</h:column>																																
+											<f:facet name="header">Quantidade de Obras</f:facet>										
+											<h:inputText value="#{autor.quantidadeObras}" rendered="#{autor.editable}" />    				
+	    									<h:outputText value="#{autor.quantidadeObras}" rendered="#{not autor.editable}" />
+										</h:column>		
 										<h:column>
 											<f:facet name="header">Editar</f:facet>    				
-	    									<h:commandLink value="Editar" action="#{editoraBean.habilitarEdicao(editora)}"></h:commandLink>
+	    									<h:commandLink value="Editar" action="#{autorBean.habilitarEdicao(autor)}"></h:commandLink>
 										</h:column>		
 										<h:column>
 											<f:facet name="header">Excluir</f:facet>    				
-	    									<h:commandLink value="Excluir" action="#{editoraBean.deletarItem(editora)}"></h:commandLink>
+	    									<h:commandLink value="Excluir" action="#{autorBean.deletarItem(autor)}"></h:commandLink>
 										</h:column>
 									</h:dataTable>
 									
 									<div class="box-footer clearfix">
 										<div class="pull-right">
-											<h:commandButton value="Salvar" action="#{editoraBean.atualizar}" styleClass="btn btn-primary"></h:commandButton>
+											<h:commandButton value="Salvar" action="#{autorBean.atualizar}" styleClass="btn btn-primary"></h:commandButton>
 										</div>								
-										<c:if test="#{editoraBean.mensagem != ''}">
-											<h:outputText value="#{editoraBean.mensagem}"></h:outputText>
+										<c:if test="#{autorBean.mensagem != ''}">
+											<h:outputText value="#{autorBean.mensagem}"></h:outputText>
 										</c:if>										
 									</div>
 								</h:form>	

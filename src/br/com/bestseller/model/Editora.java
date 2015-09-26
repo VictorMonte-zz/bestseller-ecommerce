@@ -1,13 +1,12 @@
 package br.com.bestseller.model;
 
-import java.util.Date;
 
 public class Editora {
 	private int id;	
 	private String nome;
 	private String tipo;
 	private String genero;
-	private Date fundacao;
+	private String fundacao;
 	private String sede;
 	private String proprietario;
 	private String pessoasChave;
@@ -58,11 +57,11 @@ public class Editora {
 		this.genero = genero;
 	}
 
-	public Date getFundacao() {
+	public String getFundacao() {
 		return fundacao;
 	}
 
-	public void setFundacao(Date fundacao) {
+	public void setFundacao(String fundacao) {
 		this.fundacao = fundacao;
 	}
 

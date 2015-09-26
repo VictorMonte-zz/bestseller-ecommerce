@@ -5,14 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import com.mysql.jdbc.Statement;
 
 import br.com.bestseller.model.Editora;
 import br.com.bestseller.utils.ConnectionFactory;
 import br.com.bestseller.utils.GenericDAO;
+
+import com.mysql.jdbc.Statement;
 
 public class EditoraDAO implements GenericDAO<Editora> {
 
@@ -38,7 +37,7 @@ public class EditoraDAO implements GenericDAO<Editora> {
 				editora.setNome(rs.getString(2));
 				editora.setTipo(rs.getString(3));
 				editora.setGenero(rs.getString(4));
-				editora.setFundacao(new Date(rs.getTimestamp(5).getTime()));
+				editora.setFundacao(rs.getString(5));
 				editora.setSede(rs.getString(6));
 				editora.setProprietario(rs.getString(7));
 				editora.setProdutos(rs.getString(8));
@@ -65,20 +64,20 @@ public class EditoraDAO implements GenericDAO<Editora> {
 	public Editora save(Editora editora) throws ClassNotFoundException,
 			SQLException {
 		Connection dbConnection = null;
-		PreparedStatement preparedStatement = null;
+ 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String sql = "INSERT INTO BESTSELLER.EDITORA ( NM_NOME, TP_TIPO, NM_GENERO, NM_FUNDACAO, NM_SEDE, NM_PROPRIETARIO, NM_PRODUTOS,"
+		String sql = "INSERT INTO BESTSELLER.EDITORA ( NM_NOME, TP_TIPO, NM_GENERO, DT_FUNDACAO, NM_SEDE, NM_PROPRIETARIO, NM_PRODUTOS,"
 				+ " SITE_OFICIAL, NM_CONTATO, VL_FATURAMENTO, NM_PESSOAS_CHAVE) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		try {
 
 			dbConnection = ConnectionFactory.getConnection();
-			preparedStatement = dbConnection.prepareStatement(sql);
+			preparedStatement = dbConnection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setString(1, editora.getNome());
 			preparedStatement.setString(2, editora.getTipo());			
 			preparedStatement.setString(3, editora.getGenero());
-			preparedStatement.setDate(4, (java.sql.Date) editora.getFundacao());
+			preparedStatement.setString(4, editora.getFundacao());
 			preparedStatement.setString(5, editora.getSede());
 			preparedStatement.setString(6, editora.getProprietario());
 			preparedStatement.setString(7, editora.getProdutos());
@@ -122,7 +121,7 @@ public class EditoraDAO implements GenericDAO<Editora> {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 
-		String sql = "UPDATE BESTSELLER.EDITORA  SET NM_NOME = ?, TP_TIPO = ?, NM_GENERO = ?, NM_FUNDACAO = ?, NM_SEDE = ?, NM_PROPRIETARIO = ?,"
+		String sql = "UPDATE BESTSELLER.EDITORA  SET NM_NOME = ?, TP_TIPO = ?, NM_GENERO = ?, DT_FUNDACAO = ?, NM_SEDE = ?, NM_PROPRIETARIO = ?,"
 				+ " NM_PRODUTOS = ?, SITE_OFICIAL = ?, NM_CONTATO = ?, VL_FATURAMENTO = ?, NM_PESSOAS_CHAVE = ?  WHERE ID = ?;";
 
 		try {
@@ -134,7 +133,7 @@ public class EditoraDAO implements GenericDAO<Editora> {
 			preparedStatement.setString(1, editora.getNome());
 			preparedStatement.setString(2, editora.getTipo());
 			preparedStatement.setString(3, editora.getGenero());
-			preparedStatement.setDate(4, (java.sql.Date) editora.getFundacao());
+			preparedStatement.setString(4, editora.getFundacao());
 			preparedStatement.setString(5, editora.getSede());
 			preparedStatement.setString(6, editora.getProprietario());
 			preparedStatement.setString(7, editora.getProdutos());
@@ -142,7 +141,7 @@ public class EditoraDAO implements GenericDAO<Editora> {
 			preparedStatement.setString(9, editora.getContato());
 			preparedStatement.setDouble(10, editora.getFaturamento());
 			preparedStatement.setString(11, editora.getPessoasChave());
-			preparedStatement.setInt(11, editora.getId());
+			preparedStatement.setInt(12, editora.getId());
 
 			if (preparedStatement.executeUpdate() == 1) {
 				return true;

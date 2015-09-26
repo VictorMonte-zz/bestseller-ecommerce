@@ -185,10 +185,10 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Editora <small>Verifique aqui todas editora cadastradas</small>
+					Livro <small>Verifique aqui todas livro cadastradas</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Editora</a></li>
+					<li><a href="#"><i class="fa fa-dashboard"></i> Livro</a></li>
 					<li class="active">Busca</li>
 				</ol>
 			</section>
@@ -199,95 +199,59 @@
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-header with-border">
-								<h3 class="box-title">Tabela de Editoras</h3>
+								<h3 class="box-title">Tabela de Livros</h3>
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
-								<c:if test="#{empty editoraBean.listaEditora}">
+								<c:if test="#{empty livroBean.listaLivro}">
 									<div class="panel panel-default">
 									  <div class="panel-body">
-									    <h:outputText rendered="#{empty editoraBean.listaEditora}" value="Nenhuma editora cadastrada!"></h:outputText>
+									    <h:outputText rendered="#{empty livroBean.listaLivro}" value="Nenhuma livro cadastrada!"></h:outputText>
 									  </div>
 									</div>			
 								</c:if>					
 								<h:form>
-									<h:dataTable value="#{editoraBean.listaEditora}" var="editora" styleClass="table table-bordered"
-									rendered="#{not empty editoraBean.listaEditora}">
-										<!-- <h:column>
-											<f:facet name="header">ID</f:facet>
-	    									<h:outputText value="#{editora.id}"/>
-										</h:column> -->
+									<h:dataTable value="#{livroBean.listaLivro}" var="livro" styleClass="table table-bordered"
+									rendered="#{not empty livroBean.listaLivro}">																			
 										<h:column>
-											<f:facet name="header">Nome</f:facet>										
-											<h:inputText value="#{editora.nome}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.nome}" rendered="#{not editora.editable}" />
-										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Tipo</f:facet>										
-											<h:inputText value="#{editora.tipo}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.tipo}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
-											<f:facet name="header">Genêro</f:facet>										
-											<h:inputText value="#{editora.genero}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.genero}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
-											<f:facet name="header">Data de Fundação</f:facet>										
-											<h:inputText value="#{editora.fundacao}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.fundacao}" rendered="#{not editora.editable}" />
-										</h:column> -->
+											<f:facet name="header">Titulo</f:facet>
+	    									<h:outputText value="#{livro.titulo}" rendered="#{not livro.editable}" />
+										</h:column>										
 										<h:column>
-											<f:facet name="header">Sede</f:facet>										
-											<h:inputText value="#{editora.sede}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.sede}" rendered="#{not editora.editable}" />
-										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Proprietário</f:facet>										
-											<h:inputText value="#{editora.proprietario}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.proprietario}" rendered="#{not editora.editable}" />
+											<f:facet name="header">Autor</f:facet>
+											<h:selectOneMenu disabled="true" styleClass="form-control" style="width:100%" value="#{livro.autor}">
+    											<f:selectItems value="#{livroBean.listaAutor}" var="autor" itemValue="#{autor.id}" itemLabel="#{autor.nome}" />
+											</h:selectOneMenu>	
+										</h:column>												
+										<h:column>
+											<f:facet name="header">Categoria</f:facet>
+											<h:selectOneMenu disabled="true" styleClass="form-control" style="width:100%" value="#{livro.autor}">
+    											<f:selectItems value="#{livroBean.listaCategoria}" var="autor" itemValue="#{autor.id}" itemLabel="#{autor.nome}" />
+											</h:selectOneMenu>	
 										</h:column>
 										<h:column>
-											<f:facet name="header">Pessoas-Chave</f:facet>										
-											<h:inputText value="#{editora.pessoasChave}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.pessoasChave}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
-											<f:facet name="header">Produtos</f:facet>										
-											<h:inputText value="#{editora.produtos}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.produtos}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<h:column>
-											<f:facet name="header">Contato</f:facet>										
-											<h:inputText value="#{editora.contato}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.contato}" rendered="#{not editora.editable}" />
+											<f:facet name="header">Editora</f:facet>
+											<h:selectOneMenu disabled="true" styleClass="form-control" style="width:100%" value="#{livro.autor}">
+    											<f:selectItems value="#{livroBean.listaEditora}" var="autor" itemValue="#{autor.id}" itemLabel="#{autor.nome}" />
+											</h:selectOneMenu>	
 										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Faturamento</f:facet>										
-											<h:inputText value="#{editora.faturamento}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.faturamento}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<h:column>
-											<f:facet name="header">Site Oficial</f:facet>										
-											<h:inputText value="#{editora.siteOficial}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.siteOficial}" rendered="#{not editora.editable}" />
-										</h:column>																																
+										
 										<h:column>
 											<f:facet name="header">Editar</f:facet>    				
-	    									<h:commandLink value="Editar" action="#{editoraBean.habilitarEdicao(editora)}"></h:commandLink>
+	    									<h:commandLink value="Editar" action="#{livroBean.carregarEdicao(livro)}"></h:commandLink>
 										</h:column>		
 										<h:column>
 											<f:facet name="header">Excluir</f:facet>    				
-	    									<h:commandLink value="Excluir" action="#{editoraBean.deletarItem(editora)}"></h:commandLink>
-										</h:column>
+	    									<h:commandLink value="Excluir" action="#{livroBean.deletarItem(livro)}"></h:commandLink>
+										</h:column>									
 									</h:dataTable>
 									
 									<div class="box-footer clearfix">
 										<div class="pull-right">
-											<h:commandButton value="Salvar" action="#{editoraBean.atualizar}" styleClass="btn btn-primary"></h:commandButton>
+											<h:commandButton value="Salvar" action="#{livroBean.atualizar}" styleClass="btn btn-primary"></h:commandButton>
 										</div>								
-										<c:if test="#{editoraBean.mensagem != ''}">
-											<h:outputText value="#{editoraBean.mensagem}"></h:outputText>
+										<c:if test="#{livroBean.mensagem != ''}">
+											<h:outputText value="#{livroBean.mensagem}"></h:outputText>
 										</c:if>										
 									</div>
 								</h:form>	

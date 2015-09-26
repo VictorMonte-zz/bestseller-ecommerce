@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.bestseller.model.Usuario;
@@ -16,8 +17,40 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 	@Override
 	public List<Usuario> getAll() throws ClassNotFoundException,
 			SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+
+			dbConnection = ConnectionFactory.getConnection();
+
+			String sql = "SELECT * FROM bestseller.USUARIO;";
+
+			preparedStatement = dbConnection.prepareStatement(sql);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			List<Usuario> lista = new ArrayList<Usuario>();
+
+			while (rs.next()) {
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getInt(1));
+				usuario.setNome(rs.getString(2));
+				usuario.setLogin(rs.getString(3));
+				usuario.setIsAdmin(rs.getString(4));
+				usuario.setIsAdmin(rs.getString(5));
+				lista.add(usuario);
+			}
+
+			return lista;
+
+		} finally {
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+		}
 	}
 
 	@Override
@@ -90,7 +123,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 				usuario.setNome(rs.getString("NM_USUARIO"));
 				usuario.setLogin(rs.getString("CD_LOGIN"));
 				usuario.setSenha(rs.getString("CD_SENHA"));
-				usuario.setIsAdmin(rs.getString("IS_ADMIN").charAt(0));
+				usuario.setIsAdmin(rs.getString("IS_ADMIN"));
 			}
 			return usuario;
 		} finally {
@@ -104,16 +137,77 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 	}
 
 	@Override
-	public boolean update(Usuario object) throws ClassNotFoundException,
+	public boolean update(Usuario admin) throws ClassNotFoundException,
 			SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String sql = "UPDATE BESTSELLER.USUARIO  SET NM_USUARIO = ?, CD_LOGIN = ?, CD_SENHA = ?, IS_ADMIN = ? WHERE ID = ?;  ";
+		
+		try {
+			
+			dbConnection = ConnectionFactory.getConnection();
+			preparedStatement = dbConnection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			preparedStatement.setString(1, admin.getNome());
+			preparedStatement.setString(2, admin.getLogin());
+			preparedStatement.setString(3, admin.getSenha());
+			preparedStatement.setString(4, admin.getIsAdmin());
+			preparedStatement.setInt(5, admin.getId());
+			
+			if (preparedStatement.executeUpdate() == 1) {
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		catch(Exception e)
+		{
+			throw e;
+		}
+		finally {
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+		}
 	}
 
 	@Override
-	public boolean delete(Usuario object) throws ClassNotFoundException,
+	public boolean delete(Usuario admin) throws ClassNotFoundException,
 			SQLException {
-		// TODO Auto-generated method stub
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+
+		String sqlDelete = "DELETE FROM BESTSELLER.USUARIO WHERE ID = ?;";
+
+		try {
+
+			dbConnection = ConnectionFactory.getConnection();
+			preparedStatement = dbConnection.prepareStatement(sqlDelete,
+					Statement.RETURN_GENERATED_KEYS);
+
+			preparedStatement.setInt(1, admin.getId());
+
+			if (preparedStatement.executeUpdate() == 1) {
+				return true;
+			}
+
+		} finally {
+
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+		}
+
 		return false;
 	}
 

@@ -31,7 +31,7 @@
 		<header class="main-header">
 
 			<!-- Logo -->
-			<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="home.jsf" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>ADM</b></span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg"><b>BestSeller</b>Admin</span>
 			</a>
@@ -130,9 +130,9 @@
 								<span>Livro</span> 
 								<i class="fa fa-angle-left pull-right"></i>
 							</a>
-							<ul class="treeview-menu">
-								<li><a href="#">Buscar</a></li>
-								<li><h:link value="Cadastro" outcome="Livro/cadastro" ></h:link> </li>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{livroBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:commandLink action="#{livroBean.carregarCadastro}" value="Cadastrar" /> </li>
 							</ul>
 						</li>
 						<li class="treeview">
@@ -146,13 +146,33 @@
 							</ul>
 						</li>
 						<li class="treeview">
-							<a href="#"><i class="fa fa-table"></i>
+							<a href="#"><i class="fa fa-cubes"></i>
 								<span>Editora</span> 
 								<i class="fa fa-angle-left pull-right"></i>
 							</a>
 							<ul class="treeview-menu">								
 								<li><h:commandLink action="#{editoraBean.listar}" value="Listar / Editar / Remover" /> </li>								
 								<li><h:link value="Cadastrar" outcome="CadastrarEditora" ></h:link> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-pencil"></i>
+								<span>Autor</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{autorBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarAutor" ></h:link> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-users"></i>
+								<span>Usuários</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{adminBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarAdmin" ></h:link> </li>
 							</ul>
 						</li>
 					</ul>
@@ -192,6 +212,11 @@
 							<h:form>
 								<div class="box-body">
 									<div class="form-group">
+										<h:outputLabel value="Nome"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Nome" 
+										value="#{editoraBean.editora.nome}"></h:inputText>
+									</div>
+									<div class="form-group">
 										<h:outputLabel value="Tipo"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Tipo" 
 										value="#{editoraBean.editora.tipo}"></h:inputText>
@@ -203,8 +228,13 @@
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Data de Fundação"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="Fundação" 
+										<h:inputText styleClass="form-control" a:placeholder="01/01/0001" 
 										value="#{editoraBean.editora.fundacao}"></h:inputText>
+									</div>
+									<div class="form-group">
+										<h:outputLabel value="Sede"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Sede" 
+										value="#{editoraBean.editora.sede}"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Proprietário"></h:outputLabel>
@@ -212,25 +242,30 @@
 										value="#{editoraBean.editora.proprietario}"></h:inputText>
 									</div>
 									<div class="form-group">
-										<h:outputLabel value="Pessoas-Chave"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="Pessosas-Chave" 
-										value="#{editoraBean.editora.pessoasChave}"></h:inputText>
-									</div>
-									<div class="form-group">
 										<h:outputLabel value="Produtos"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Produtos" 
 										value="#{editoraBean.editora.produtos}"></h:inputText>
 									</div>
 									<div class="form-group">
-										<h:outputLabel value="Faturamento"></h:outputLabel>
-										<h:inputText styleClass="form-control" a:placeholder="Faturamento" 
-										value="#{editoraBean.editora.faturamento}"></h:inputText>
-									</div>																																											
-									<div class="form-group">
 										<h:outputLabel value="Site Oficial"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Site Oficial" 
 										value="#{editoraBean.editora.siteOficial}"></h:inputText>
 									</div>
+									<div class="form-group">
+										<h:outputLabel value="Contato"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Contato" 
+										value="#{editoraBean.editora.contato}"></h:inputText>
+									</div>
+									<div class="form-group">
+										<h:outputLabel value="Faturamento"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Faturamento" 
+										value="#{editoraBean.editora.faturamento}"></h:inputText>
+									</div>
+									<div class="form-group">
+										<h:outputLabel value="Pessoas-Chave"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Pessosas-Chave" 
+										value="#{editoraBean.editora.pessoasChave}"></h:inputText>
+									</div>																		
 								</div>
 
 								<div class="box-footer">
@@ -238,7 +273,11 @@
 										<h:commandButton value="Salvar" styleClass="btn btn-primary" 
 										action="#{editoraBean.cadastrar}" />
 									</div>
-								</div>
+									<c:if test="#{editoraBean.mensagem != ''}">
+										<h:outputText value="#{editoraBean.mensagem}"></h:outputText>
+									</c:if>
+								</div>								
+								
 							</h:form>
 							
 						</div>

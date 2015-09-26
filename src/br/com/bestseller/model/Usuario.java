@@ -4,13 +4,13 @@ public class Usuario{
 	private int id;
 	private String nome;
 	private String login;
-		private String senha;
-	private char isAdmin;
+	private String senha;
+	private String isAdmin;
 	
 	public Usuario(){				
 	}
 	
-	public Usuario(int id, String nome, String senha, char isAdmin){
+	public Usuario(int id, String nome, String senha, String isAdmin){
 		this.id = id;
 		this.nome = nome;
 		this.senha = senha;
@@ -41,10 +41,10 @@ public class Usuario{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public char getIsAdmin() {
+	public String getIsAdmin() {
 		return isAdmin;
 	}
-	public void setIsAdmin(char isAdmin) {
+	public void setIsAdmin(String isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 	

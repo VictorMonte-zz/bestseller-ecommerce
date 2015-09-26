@@ -32,7 +32,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="index2.html"><b>BestSeller</b>Admin</a>
+        <a href="login.jsf"><b>BestSeller</b>Admin</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Logue para começar sua sessão</p>
@@ -47,12 +47,12 @@
           <div class="row">            
             <div class="col-xs-4">
            		<h:commandButton value="Logar" action="#{adminBean.logar}" styleClass="btn btn-primary btn-block btn-flat" />              
-            </div>
+            </div>            
+			<c:if test="#{adminBean.mensagem != ''}">
+				<h:outputText value="#{adminBean.mensagem}" style="color:red"></h:outputText>
+			</c:if>
           </div>          
-        </h:form>
-        
-        <a href="#">Esqueci minha senha</a><br />
-        <a href="cadastro.jsf" class="text-center">Cadastre-se</a>
+        </h:form>                
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

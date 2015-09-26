@@ -56,8 +56,9 @@
 						</a>
 							<ul class="dropdown-menu">
 								<!-- The user image in the menu -->
-								<li class="user-header"><img src="dist/img/avatar5.png"
-									class="img-circle" alt="User Image"></img>
+								<li class="user-header"><img
+									src="dist/img/avatar5.png" class="img-circle"
+									alt="User Image"></img>
 									<p>
 										Administrador - Web Developer <small>Member since Nov.
 											2012</small>
@@ -114,7 +115,7 @@
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
 				</div>
-
+				
 				<!-- Sidebar Menu -->
 				<h:form>
 					<ul class="sidebar-menu">
@@ -177,135 +178,123 @@
 					</ul>
 				</h:form>
 				<!-- /.sidebar-menu -->
+				
 			</section>
+			<!-- /.sidebar -->
 		</aside>
-		
+
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Editora <small>Verifique aqui todas editora cadastradas</small>
+					Autor <small>Realize o cadastro no formulário abaixo</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Editora</a></li>
-					<li class="active">Busca</li>
+					<li><a href="#"><i class="fa fa-dashboard"></i> Autor</a></li>
+					<li class="active">Cadastro</li>
 				</ol>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<div class="col-xs-12">
-						<div class="box">
+					<!-- left column -->
+					<div class="col-md-6">
+						<!-- general form elements -->
+						<div class="box box-primary">
 							<div class="box-header with-border">
-								<h3 class="box-title">Tabela de Editoras</h3>
+								<h3 class="box-title">Cadastro de Autor</h3>
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body">
-								<c:if test="#{empty editoraBean.listaEditora}">
-									<div class="panel panel-default">
-									  <div class="panel-body">
-									    <h:outputText rendered="#{empty editoraBean.listaEditora}" value="Nenhuma editora cadastrada!"></h:outputText>
-									  </div>
-									</div>			
-								</c:if>					
-								<h:form>
-									<h:dataTable value="#{editoraBean.listaEditora}" var="editora" styleClass="table table-bordered"
-									rendered="#{not empty editoraBean.listaEditora}">
-										<!-- <h:column>
-											<f:facet name="header">ID</f:facet>
-	    									<h:outputText value="#{editora.id}"/>
-										</h:column> -->
-										<h:column>
-											<f:facet name="header">Nome</f:facet>										
-											<h:inputText value="#{editora.nome}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.nome}" rendered="#{not editora.editable}" />
-										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Tipo</f:facet>										
-											<h:inputText value="#{editora.tipo}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.tipo}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
-											<f:facet name="header">Genêro</f:facet>										
-											<h:inputText value="#{editora.genero}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.genero}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
-											<f:facet name="header">Data de Fundação</f:facet>										
-											<h:inputText value="#{editora.fundacao}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.fundacao}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<h:column>
-											<f:facet name="header">Sede</f:facet>										
-											<h:inputText value="#{editora.sede}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.sede}" rendered="#{not editora.editable}" />
-										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Proprietário</f:facet>										
-											<h:inputText value="#{editora.proprietario}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.proprietario}" rendered="#{not editora.editable}" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Pessoas-Chave</f:facet>										
-											<h:inputText value="#{editora.pessoasChave}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.pessoasChave}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<!-- <h:column>
-											<f:facet name="header">Produtos</f:facet>										
-											<h:inputText value="#{editora.produtos}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.produtos}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<h:column>
-											<f:facet name="header">Contato</f:facet>										
-											<h:inputText value="#{editora.contato}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.contato}" rendered="#{not editora.editable}" />
-										</h:column>
-										<!-- <h:column>
-											<f:facet name="header">Faturamento</f:facet>										
-											<h:inputText value="#{editora.faturamento}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.faturamento}" rendered="#{not editora.editable}" />
-										</h:column> -->
-										<h:column>
-											<f:facet name="header">Site Oficial</f:facet>										
-											<h:inputText value="#{editora.siteOficial}" rendered="#{editora.editable}" />    				
-	    									<h:outputText value="#{editora.siteOficial}" rendered="#{not editora.editable}" />
-										</h:column>																																
-										<h:column>
-											<f:facet name="header">Editar</f:facet>    				
-	    									<h:commandLink value="Editar" action="#{editoraBean.habilitarEdicao(editora)}"></h:commandLink>
-										</h:column>		
-										<h:column>
-											<f:facet name="header">Excluir</f:facet>    				
-	    									<h:commandLink value="Excluir" action="#{editoraBean.deletarItem(editora)}"></h:commandLink>
-										</h:column>
-									</h:dataTable>
-									
-									<div class="box-footer clearfix">
-										<div class="pull-right">
-											<h:commandButton value="Salvar" action="#{editoraBean.atualizar}" styleClass="btn btn-primary"></h:commandButton>
-										</div>								
-										<c:if test="#{editoraBean.mensagem != ''}">
-											<h:outputText value="#{editoraBean.mensagem}"></h:outputText>
-										</c:if>										
+							
+							<!-- form start -->
+							<h:form>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Nome do Autor"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Nome" 
+										value="#{autorBean.autor.nome}"></h:inputText>
+									</div>									
+								</div>	
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Idioma"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Idioma" 
+										value="#{autorBean.autor.idioma}"></h:inputText>
+									</div>									
+								</div>								
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Genêro"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Genêro" 
+										value="#{autorBean.autor.genero}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="País de Origem"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="País de Origem" 
+										value="#{autorBean.autor.paiorigem}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Data de Nascimento"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="01/01/0001" 
+										value="#{autorBean.autor.nascimento}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Quantidade de Obras"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Quantidade de Obras" 
+										value="#{autorBean.autor.quantidadeObras}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Nível Escolar"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Nível Escolar" 
+										value="#{autorBean.autor.nivelEscolar}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Endereço"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Endereço" 
+										value="#{autorBean.autor.endereco}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Data de Falecimento"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="01/01/0001" 
+										value="#{autorBean.autor.dataFalecimento}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Prêmios"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Prêmios" 
+										value="#{autorBean.autor.premios}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-footer">
+									<div class="pull-right">
+										<h:commandButton value="Salvar" styleClass="btn btn-primary" 
+										action="#{autorBean.cadastrar}" />
 									</div>
-								</h:form>	
-							</div>
-							<!-- /.box-body -->							
+									<c:if test="#{autorBean.mensagem != ''}">
+											<h:outputText value="#{autorBean.mensagem}"></h:outputText>
+									</c:if>	
+								</div>
+							</h:form>
 							
 						</div>
-						<!-- /.box -->
-
-
 					</div>
-					<!-- /.col -->
 				</div>
-				<!-- /.row -->
-
 			</section>
-			<!-- /.content -->
-			
 		</div>
 		<!-- /.content-wrapper -->
 
@@ -380,8 +369,6 @@
 				<!-- /.tab-pane -->
 			</div>
 		</aside>
-
-
 		<div class="control-sidebar-bg"></div>
 	</div>
 	<script src="js/jQuery-2.1.4.min.js"></script>

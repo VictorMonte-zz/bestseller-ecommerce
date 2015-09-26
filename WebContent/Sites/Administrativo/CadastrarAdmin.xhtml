@@ -1,105 +1,330 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<html 	xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core"  
-      	xmlns:p="http://primefaces.prime.com.tr/ui"        
-      	xmlns:c="http://java.sun.com/jsp/jstl/core"
-      	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"	
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <head>
-    <meta charset="utf-8"></meta>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-    <title>BestSeller Admin | Log in</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="css/bootstrap.min.css"></link>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
-    <!-- iCheck -->
-    <link rel="stylesheet" href="js/iCheck/square/blue.css"></link>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	<title>BestSeller Admin | Home</title>
+	<meta
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport"></meta>
+	<!-- Bootstrap 3.3.5 -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"></link>
+	<!-- Font Awesome -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
+	<!-- Ionicons -->
+	<link rel="stylesheet"
+		href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
+	<!-- Theme style -->
+	<link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
+	<link rel="stylesheet" href="dist/css/skins/skin-blue.min.css"></link>
 </head>
-  <body class="hold-transition register-page">
-    <div class="register-box">
-      <div class="register-logo">
-        <a href="login.xhtml"><b>BestSeller</b>Admin</a>
-      </div>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
 
-      <div class="register-box-body">
-        <p class="login-box-msg">Registre-se como administrador</p>
-        
-        <h:form>
-	        <!-- Nome -->
-        	<div class="form-group has-feedback">
-        		<h:inputText a:placeholder="Nome Completo" styleClass="form-control" value="#{adminBean.admin.nome}"></h:inputText>            	
-            	<span class="glyphicon glyphicon-user form-control-feedback"></span>
-          	</div>
-          	
-          	<!-- Login  -->
-          	<div class="form-group has-feedback">
-        		<h:inputText a:placeholder="Login" styleClass="form-control" value="#{adminBean.admin.nome}"></h:inputText>            	
-            	<span class="glyphicon glyphicon-eye-open form-control-feedback"></span>
-          	</div>
-          	
-          	<!-- Senha -->
-          	<div class="form-group has-feedback">
-        		<h:inputSecret a:placeholder="Senha" styleClass="form-control" value="#{adminBean.admin.nome}"></h:inputSecret>            	
-            	<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          	</div>
-          	
-          	<div class="col-xs-4">
-              
-            </div>
-            
-            <div class="row">
-	            <div class="col-xs-8">
-	              <div class="checkbox icheck">
-	                <label>
-	                  <input type="checkbox">  Eu concórdo com os</input> <a href="#">termos</a>
-	                </label>
-	              </div>
-	            </div><!-- /.col -->
-	            <div class="col-xs-4">
-	              <h:commandButton value="Cadastrar" styleClass="btn btn-primary btn-block btn-flat" action="#{adminBean.cadastrar}"></h:commandButton>
-	            </div><!-- /.col -->
-          </div>
-          	
-        </h:form>
-        
-        <!-- <div class="social-auth-links text-center">
-          <p>- OR -</p>
-          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
-          <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
-        </div> -->
+		<!-- Main Header -->
+		<header class="main-header">
 
-        <a href="login.jsf" class="text-center">Eu já estou cadastrado</a>
-      </div><!-- /.form-box -->
-    </div><!-- /.register-box -->
+			<!-- Logo -->
+			<a href="home.jsf" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><b>ADM</b></span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><b>BestSeller</b>Admin</span>
+			</a>
 
-    <!-- jQuery 2.1.4 -->
-    <script src="js/jQuery-2.1.4.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- iCheck -->
-    <script src="js/iCheck/icheck.min.js"></script>
-    <script>
-      $(function () {
-        $('input').iCheck({
-          checkboxClass: 'icheckbox_square-blue',
-          radioClass: 'iradio_square-blue',
-          increaseArea: '20%' // optional
-        });
-      });
-    </script>
-  </body>
+			<!-- Header Navbar -->
+			<nav class="navbar navbar-static-top" role="navigation">
+				<!-- Sidebar toggle button-->
+				<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+					role="button"> <span class="sr-only">Toggle navigation</span>
+				</a>
+				<!-- Navbar Right Menu -->
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<!-- User Account Menu -->
+						<li class="dropdown user user-menu">
+							<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
+							data-toggle="dropdown"> <!-- The user image in the navbar-->
+								<img src="dist/img/avatar5.png" class="user-image"
+								alt="User Image"></img> <!-- hidden-xs hides the username on small devices so only the image appears. -->
+								<span class="hidden-xs"><h:outputText
+										value="${adminBean.admin.nome}"></h:outputText></span>
+						</a>
+							<ul class="dropdown-menu">
+								<!-- The user image in the menu -->
+								<li class="user-header"><img
+									src="dist/img/avatar5.png" class="img-circle"
+									alt="User Image"></img>
+									<p>
+										Administrador - Web Developer <small>Member since Nov.
+											2012</small>
+									</p></li>
+								<!-- Menu Body -->
+								<li class="user-body">
+									<div class="row">
+										<div class="col-xs-4 text-center">
+											<a href="#">Followers</a>
+										</div>
+										<div class="col-xs-4 text-center">
+											<a href="#">Sales</a>
+										</div>
+										<div class="col-xs-4 text-center">
+											<a href="#">Friends</a>
+										</div>
+									</div> <!-- /.row -->
+								</li>
+								<!-- Menu Footer-->
+								<li class="user-footer">
+									<div class="pull-left">
+										<a href="#" class="btn btn-default btn-flat">Profile</a>
+									</div>
+									<div class="pull-right">
+										<a href="#" class="btn btn-default btn-flat">Sign out</a>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<!-- Control Sidebar Toggle Button -->
+						<li><a href="#" data-toggle="control-sidebar"><i
+								class="fa fa-gears"></i></a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!-- Left side column. contains the logo and sidebar -->
+		<aside class="main-sidebar">
+
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar">
+
+				<!-- Sidebar user panel (optional) -->
+				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="dist/img/avatar5.png" class="img-circle"
+							alt="User Image"></img>
+					</div>
+					<div class="pull-left info">
+						<p>
+							<h:outputText value="${adminBean.admin.nome}"></h:outputText>
+						</p>
+						<!-- Status -->
+						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+					</div>
+				</div>
+				
+				<!-- Sidebar Menu -->
+				<h:form>
+					<ul class="sidebar-menu">
+						<li class="header">Menu</li>
+			            <li>
+			            	<h:link outcome="home">
+			            		<i class="fa fa-dashboard"></i> <span>Home</span>
+			            	</h:link>			            	
+		            	</li>			            
+						<li class="treeview">
+							<a href="#"><i class="fa fa-book"></i>
+								<span>Livro</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{livroBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:commandLink action="#{livroBean.carregarCadastro}" value="Cadastrar" /> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-table"></i>
+								<span>Categoria</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{categoriaBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarCategoria" ></h:link> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-cubes"></i>
+								<span>Editora</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{editoraBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarEditora" ></h:link> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-pencil"></i>
+								<span>Autor</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{autorBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarAutor" ></h:link> </li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-users"></i>
+								<span>Usuários</span> 
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">								
+								<li><h:commandLink action="#{adminBean.listar}" value="Listar / Editar / Remover" /> </li>								
+								<li><h:link value="Cadastrar" outcome="CadastrarAdmin" ></h:link> </li>
+							</ul>
+						</li>
+					</ul>
+				</h:form>
+				<!-- /.sidebar-menu -->
+				
+			</section>
+			<!-- /.sidebar -->
+		</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Administrador <small>Realize o cadastro no formulário abaixo</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Cadastro</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<!-- left column -->
+					<div class="col-md-6">
+						<!-- general form elements -->
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">Cadastro de Administrador</h3>
+							</div>
+							<!-- /.box-header -->
+							
+							<!-- form start -->
+							<h:form>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Nome"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Nome" 
+										value="#{adminBean.admin.nome}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Login"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="Login" 
+										value="#{adminBean.admin.login}"></h:inputText>
+									</div>									
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<h:outputLabel value="Senha"></h:outputLabel>
+										<h:inputSecret styleClass="form-control" a:placeholder="Senha" 
+										value="#{adminBean.admin.senha}"></h:inputSecret>
+									</div>									
+								</div>
+
+								<div class="box-footer">
+									<div class="pull-right">
+										<h:commandButton value="Salvar" styleClass="btn btn-primary" 
+										action="#{adminBean.cadastrar}" />
+									</div>
+									<c:if test="#{adminBean.mensagem != ''}">
+											<h:outputText value="#{adminBean.mensagem}"></h:outputText>
+									</c:if>
+								</div>
+							</h:form>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<!-- /.content-wrapper -->
+
+		<!-- Main Footer -->
+		<footer class="main-footer">
+			<!-- To the right -->
+			<div class="pull-right hidden-xs">Anything you want</div>
+			<!-- Default to the left -->
+			<strong>Copyright 2015 <a href="#">Company</a>.
+			</strong> All rights reserved.
+		</footer>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Create the tabs -->
+			<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+				<li class="active"><a href="#control-sidebar-home-tab"
+					data-toggle="tab"><i class="fa fa-home"></i></a></li>
+				<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i
+						class="fa fa-gears"></i></a></li>
+			</ul>
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<!-- Home tab content -->
+				<div class="tab-pane active" id="control-sidebar-home-tab">
+					<h3 class="control-sidebar-heading">Recent Activity</h3>
+					<ul class="control-sidebar-menu">
+						<li><a href="javascript::;"> <i
+								class="menu-icon fa fa-birthday-cake bg-red"></i>
+								<div class="menu-info">
+									<h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+									<p>Will be 23 on April 24th</p>
+								</div>
+						</a></li>
+					</ul>
+					<!-- /.control-sidebar-menu -->
+
+					<h3 class="control-sidebar-heading">Tasks Progress</h3>
+					<ul class="control-sidebar-menu">
+						<li><a href="javascript::;">
+								<h4 class="control-sidebar-subheading">
+									Custom Template Design <span
+										class="label label-danger pull-right">70%</span>
+								</h4>
+								<div class="progress progress-xxs">
+									<div class="progress-bar progress-bar-danger"
+										style="width: 70%"></div>
+								</div>
+						</a></li>
+					</ul>
+					<!-- /.control-sidebar-menu -->
+
+				</div>
+				<!-- /.tab-pane -->
+				<!-- Stats tab content -->
+				<div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab
+					Content</div>
+				<!-- /.tab-pane -->
+				<!-- Settings tab content -->
+				<div class="tab-pane" id="control-sidebar-settings-tab">
+					<form method="post">
+						<h3 class="control-sidebar-heading">General Settings</h3>
+						<div class="form-group">
+							<label class="control-sidebar-subheading"> Report panel
+								usage <input type="checkbox" class="pull-right"></input>
+							</label>
+							<p>Some information about this general settings option</p>
+						</div>
+						<!-- /.form-group -->
+					</form>
+				</div>
+				<!-- /.tab-pane -->
+			</div>
+		</aside>
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<script src="js/jQuery-2.1.4.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="dist/js/app.min.js"></script>
+</body>
 </html>
