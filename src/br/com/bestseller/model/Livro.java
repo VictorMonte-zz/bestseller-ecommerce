@@ -10,10 +10,11 @@ public class Livro {
 	private String localPublicacao;	
 	private int idadeRecomendada;
 	private String capa;
+	private String descricao;
+	private double preco;
 	private int autor;
 	private int editora;
-	private int categoria;
-	private boolean editable;
+	private int categoria;	
 
 	public Livro() {
 	}
@@ -98,14 +99,6 @@ public class Livro {
 		this.categoria = categoria;
 	}
 
-	public boolean isEditable() {
-		return editable;
-	}
-
-	public void setEditable(boolean editable) {
-		this.editable = editable;
-	}
-
 	public int getIdadeRecomendada() {
 		return idadeRecomendada;
 	}
@@ -121,6 +114,24 @@ public class Livro {
 	public void setCapa(String capa) {
 		this.capa = capa;
 	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+	
+	
 	
 	
 	

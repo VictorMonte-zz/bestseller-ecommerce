@@ -144,6 +144,9 @@ public class LivroBean {
 					|| livro.getIdadeRecomendada() == 0
 					|| livro.getCapa() == null
 					|| livro.getCapa().isEmpty()
+					|| livro.getDescricao() == null
+					|| livro.getDescricao().isEmpty()
+					|| livro.getPreco() == 0
 					|| livro.getAutor() == 0 
 					|| livro.getEditora() == 0
 					|| livro.getCategoria() == 0) {
@@ -173,8 +176,7 @@ public class LivroBean {
 			return "CadastrarLivro";
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		}
 
 		return null;
@@ -195,16 +197,6 @@ public class LivroBean {
 			e.printStackTrace();
 		}
 
-		return null;
-	}
-
-	public String habilitarEdicao(Livro livro) {
-		try {
-			livro.setEditable(true);
-			return "ListarLivro";
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return null;
 	}
 

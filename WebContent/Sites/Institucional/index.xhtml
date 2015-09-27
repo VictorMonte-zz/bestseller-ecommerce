@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
 <meta charset="utf-8"></meta>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
@@ -96,13 +97,13 @@
 			</ul>
 			<!-- Login Area  -->
 			<c:choose>
-				<c:when test="#{usuarioBean.usuario.id != ''}">
+				<c:when test="#{bestSellerBean.usuario.id != ''}">
 					<h:form class="navbar-form navbar-right">
 						<div class="form-group">
 							<div style="font-family:'open_sanscondensed_light';
 							font-size: 20px;text-transform: uppercase;color: #fff!important;">
-								Bem vindo, <h:outputLabel value="#{usuarioBean.usuario.nome}"></h:outputLabel>
-								<h:commandLink action="#{usuarioBean.deslogar}">
+								Bem vindo, <h:outputLabel value="#{bestSellerBean.usuario.nome}"></h:outputLabel>
+								<h:commandLink action="#{bestSellerBean.deslogar}">
     								<span class="glyphicon glyphicon-log-out"></span>
 								</h:commandLink>			
 							</div>							
@@ -113,14 +114,14 @@
 				<c:otherwise>
 					<h:form class="navbar-form navbar-right">
 			            <div class="form-group">							
-			              	<h:inputText a:placeholder="Login" value="#{usuarioBean.usuario.login}" styleClass="form-control">
+			              	<h:inputText a:placeholder="Login" value="#{bestSellerBean.usuario.login}" styleClass="form-control">
 			              	</h:inputText>
 			            </div>
 			            <div class="form-group">				              
-				              <h:inputSecret a:placeholder="Senha" value="#{usuarioBean.usuario.senha}" styleClass="form-control">
+				              <h:inputSecret a:placeholder="Senha" value="#{bestSellerBean.usuario.senha}" styleClass="form-control">
 				              </h:inputSecret>
 			            </div>			            
-			            <h:commandButton styleClass="btn btn-primary" action="#{usuarioBean.logar}" value="Logar"></h:commandButton>		            
+			            <h:commandButton styleClass="btn btn-primary" action="#{bestSellerBean.logar}" value="Logar"></h:commandButton>		            
         			</h:form>
 				</c:otherwise>
 			</c:choose>	
@@ -134,26 +135,33 @@
 	<div class="container main-container">
 		<div class="row">
 
-			<!-- Slider -->
+			<div class="col-lg-1 visible-lg">
+				<div class="row text-center">
+					<div class="col-lg-12 col-md-12 hero-feature">						
+					</div>
+				</div>
+			</div>
+				
+			<!-- Slider -->			
 			<div class="col-lg-9 col-md-12">
 				<div class="slider">
 					<ul class="bxslider">
 						<li><a href="index.html"> <img
-								src="images/banner_slider-3.jpg" alt="" />
+								src="images/banner1.jpg" alt="" />
 						</a></li>
 						<li><a href="index.html"> <img
-								src="images/banner_slider-2.jpg" alt="" />
+								src="images/banner2.jpg" alt="" />
 						</a></li>
 						<li><a href="index.html"> <img
-								src="images/banner_slider-1.jpg" alt="" />
+								src="images/banner3.jpg" alt="" />
 						</a></li>
 					</ul>
 				</div>
-			</div>
+			</div>			
 			<!-- End Slider -->
 
 			<!-- Product Selection, visible only on large desktop -->
-			<div class="col-lg-3 visible-lg">
+			<!-- <div class="col-lg-3 visible-lg">
 				<div class="row text-center">
 					<div class="col-lg-12 col-md-12 hero-feature">
 						<div class="thumbnail">
@@ -177,7 +185,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- End Product Selection -->
 		</div>
 
@@ -187,53 +195,17 @@
 				<!-- Categories -->
 				<div class="col-lg-12 col-md-12 col-sm-6">
 					<div class="no-padding">
-						<span class="title">CATEGORIES</span>
+						<span class="title">Categorias</span>
 					</div>
 
 					<div id="main_menu">
 						<div class="list-group panel panel-cat">
-							<a href="#sub1" class="list-group-item" data-toggle="collapse"
-								data-parent="#main_menu">Cras justo odio <i
-								class="fa fa-caret-down pull-right"></i></a>
-							<div class="collapse list-group-sub" id="sub1">
-								<a href="#SubMenu1" class="list-group-item"
-									data-toggle="collapse" data-parent="#SubMenu1">Subitem 1 <i
-									class="fa fa-caret-down"></i></a>
-								<div class="collapse list-group-submenu" id="SubMenu1">
-									<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem
-										1 a</a> <a href="#" class="list-group-item"
-										data-parent="#SubMenu1">Subitem 2 b</a> <a href="#SubSubMenu1"
-										class="list-group-item" data-toggle="collapse"
-										data-parent="#SubSubMenu1">Subitem 3 c <i
-										class="fa fa-caret-down"></i></a>
-									<div class="collapse list-group-submenu list-group-submenu-1"
-										id="SubSubMenu1">
-										<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub
-											sub item 1</a> <a href="#" class="list-group-item"
-											data-parent="#SubSubMenu1">Sub sub item 2</a>
-									</div>
-									<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem
-										4 d</a>
-								</div>
-								<a href="javascript:;" class="list-group-item">Subitem 2</a> <a
-									href="javascript:;" class="list-group-item">Subitem 3</a>
-							</div>
-							<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-							<a href="#sub2" class="list-group-item" data-toggle="collapse"
-								data-parent="#main_menu">Porta ac consectetur ac <i
-								class="fa fa-caret-down pull-right"></i></a>
-							<div class="collapse list-group-sub" id="sub2">
-								<a href="" class="list-group-item">Subitem 1</a> <a href=""
-									class="list-group-item">Subitem 2</a> <a href=""
-									class="list-group-item">Subitem 3</a>
-							</div>
-							<a href="#" class="list-group-item">Vestibulum at eros</a> <a
-								href="#" class="list-group-item">Porta ac consectetur ac</a> <a
-								href="#" class="list-group-item">Cras justo odio</a> <a
-								href="#" class="list-group-item">Dapibus ac facilisis in</a> <a
-								href="#" class="list-group-item">Porta ac consectetur ac</a> <a
-								href="#" class="list-group-item">Vestibulum at eros</a> <a
-								href="#" class="list-group-item">Porta ac consectetur ac</a>
+						<h:form>						
+							<h:commandLink action="#{bestSellerBean.filtrar(0)}" styleClass="list-group-item" value="Todas" />
+							<ui:repeat var="categoria" value="#{bestSellerBean.categorias}">
+								<h:commandLink action="#{bestSellerBean.filtrar(categoria.id)}" styleClass="list-group-item" value="#{categoria.nome}" />
+							</ui:repeat>
+						</h:form>							
 						</div>
 					</div>
 
@@ -241,7 +213,7 @@
 				<!-- End Categories -->
 
 				<!-- Best Seller -->
-				<div class="col-lg-12 col-md-12 col-sm-6">
+				<!-- <div class="col-lg-12 col-md-12 col-sm-6">
 					<div class="no-padding">
 						<span class="title">BEST SELLER</span>
 					</div>
@@ -287,7 +259,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- End Best Seller -->
 
 			</div>
@@ -297,211 +269,43 @@
 			<!-- Featured -->
 			<div class="col-lg-9 col-md-9 col-sm-12">
 				<div class="col-lg-12 col-sm-12">
-					<span class="title">FEATURED PRODUCTS</span>
+					<span class="title">Livros</span>
 				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-2.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Age Of Wisdom Tan Graphic Tee</a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 122.51</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
+				
+				<h:form>
+					<ui:repeat var="livro" value="#{bestSellerBean.livros}">
+						<div class="col-lg-4 col-sm-4 hero-feature text-center">
+							<div class="thumbnail">
+								<a href="detail.html" class="link-p"> <img
+									src="images/#{livro.capa}.jpg" alt=""></img>
+								</a>
+								<div class="caption prod-caption">
+									<h4>
+										<!-- <a href="detail.html">#{livro.titulo}</a> -->
+										<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}" value="#{livro.titulo}"></h:commandLink>
+									</h4>
+									<p>#{livro.descricao}</p>
+									<p>
+										<div class="btn-group">
+											<!-- <a href="#" class="btn btn-default">$ #{livro.preco}</a> <a href="#"
+												class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
+												Buy</a> -->
+											<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}" value="$ #{livro.preco}"
+											styleClass="btn btn-default"></h:commandLink>											
+											<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}"
+											styleClass="btn btn-primary">
+											<i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Comprar</h:commandLink>
+										</div>
+									</p>
 								</div>
-							</p>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-3.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Classic Laundry Green Graphic T-Shirt</a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 628.96</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-4.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Disc Jockey Print T-Shirt</a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 394.64</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-5.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Live Nation 3 Days of Peace and Music
-									Carbon</a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 428.96</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-6.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Live Nation ACDC Gray T-Shirt</a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 428.96</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-7.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Live Nation Aerosmith Ivory T-Shirt</a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 632.15</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
+					</ui:repeat>
+				</h:form>
 			</div>
 			<!-- End Featured -->
 
 			<div class="clearfix visible-sm"></div>
-
-			<!-- Adidas Category -->
-			<div class="col-lg-9 col-md-9 col-sm-12">
-				<div class="col-lg-12 col-sm-12">
-					<span class="title">ADIDAS</span>
-				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-10.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Adidas Men Blue &amp; Red Striped Polo
-									T-shirt </a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 22.22</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-11.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Adidas Men Flame Black T-shirt</a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 15.47</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-4 hero-feature text-center">
-					<div class="thumbnail">
-						<a href="detail.html" class="link-p"> <img
-							src="images/product-12.jpg" alt=""></img>
-						</a>
-						<div class="caption prod-caption">
-							<h4>
-								<a href="detail.html">Adidas Men Red Printed T-shirt</a>
-							</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aut, minima!</p>
-							<p>
-								<div class="btn-group">
-									<a href="#" class="btn btn-default">$ 20.63</a> <a href="#"
-										class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-										Buy</a>
-								</div>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Adidas Category -->
 
 		</div>
 	</div>
@@ -521,12 +325,14 @@
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-6">
 			<div class="column">
-				<h4>Categories</h4>
+				<h4>Categorias</h4>
 				<ul>
-					<li><a href="catalogue.html">Cras justo odio</a></li>
-					<li><a href="catalogue.html">Dapibus ac facilisis in</a></li>
-					<li><a href="catalogue.html">Morbi leo risus</a></li>
-					<li><a href="catalogue.html">Porta ac consectetur ac</a></li>
+					<h:form>
+						<h:commandLink action="#{bestSellerBean.filtrar(0)}" value="Todas" />
+						<ui:repeat var="categoria" value="#{bestSellerBean.categorias}">
+							<li><h:commandLink action="#{bestSellerBean.filtrar(categoria.id)}" value="#{categoria.nome}" /></li>
+						</ui:repeat>
+					</h:form>				
 				</ul>
 			</div>
 		</div>

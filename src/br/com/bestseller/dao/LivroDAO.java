@@ -41,11 +41,12 @@ public class LivroDAO implements GenericDAO<Livro> {
 				livro.setLocalPublicacao(rs.getString(7));
 				livro.setIdadeRecomendada(rs.getInt(8));
 				livro.setCapa(rs.getString(9));
-				livro.setAutor(rs.getInt(10));
-				livro.setEditora(rs.getInt(11));
-				livro.setCategoria(rs.getInt(12));
-				
-				
+				livro.setDescricao(rs.getString(10));
+				livro.setPreco(rs.getDouble(11));
+				livro.setAutor(rs.getInt(12));
+				livro.setEditora(rs.getInt(13));
+				livro.setCategoria(rs.getInt(14));
+
 				lista.add(livro);
 			}
 
@@ -66,14 +67,16 @@ public class LivroDAO implements GenericDAO<Livro> {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		
+
 		String sql = "INSERT INTO bestseller.livro"
-				+ "(NM_TITULO, CD_ISBN, CD_EDICAO, QT_VOLUME, DT_PUBLICACAO, NM_LOCAL_PUBLICAO, IDADE_RECOMENDADA, ID_CAPA, FK_AUTOR, FK_EDITORA, FK_CATEGORIA) "
-				+ "values (?, ?, ?, ? ,? ,? ,?, ?, ?, ?, ?);";
+				+ "(NM_TITULO, CD_ISBN, CD_EDICAO, QT_VOLUME, DT_PUBLICACAO, NM_LOCAL_PUBLICAO, IDADE_RECOMENDADA, ID_CAPA, DS_DESCRICAO, VL_PRECO,"
+				+ " FK_AUTOR, FK_EDITORA, FK_CATEGORIA) "
+				+ "values (?, ?, ?, ? ,? ,? ,?, ?, ?, ?, ?, ?, ?);";
 
 		try {
 			dbConnection = ConnectionFactory.getConnection();
-			preparedStatement = dbConnection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			preparedStatement = dbConnection.prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setString(1, livro.getTitulo());
 			preparedStatement.setString(2, livro.getIsbn());
@@ -83,18 +86,18 @@ public class LivroDAO implements GenericDAO<Livro> {
 			preparedStatement.setString(6, livro.getLocalPublicacao());
 			preparedStatement.setInt(7, livro.getIdadeRecomendada());
 			preparedStatement.setString(8, livro.getCapa());
-			preparedStatement.setInt(9, livro.getAutor());
-			preparedStatement.setInt(10, livro.getEditora());
-			preparedStatement.setInt(11, livro.getCategoria());
-			
-			
+			preparedStatement.setString(9, livro.getDescricao());
+			preparedStatement.setDouble(10, livro.getPreco());
+			preparedStatement.setInt(11, livro.getAutor());
+			preparedStatement.setInt(12, livro.getEditora());
+			preparedStatement.setInt(13, livro.getCategoria());
+
 			if (preparedStatement.executeUpdate() == 1) {
 				// execute insert SQL stetement
 				resultSet = preparedStatement.getGeneratedKeys();
-                if(resultSet.next())
-                {
-                	livro.setId(resultSet.getInt(1));
-                }
+				if (resultSet.next()) {
+					livro.setId(resultSet.getInt(1));
+				}
 				return livro;
 			}
 
@@ -106,14 +109,57 @@ public class LivroDAO implements GenericDAO<Livro> {
 				dbConnection.close();
 			}
 		}
-		
+
 		return null;
 	}
 
 	@Override
 	public Livro get(Integer id) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+
+			dbConnection = ConnectionFactory.getConnection();
+
+			String sql = "SELECT * FROM bestseller.LIVRO WHERE ID = ?;";
+
+			preparedStatement = dbConnection.prepareStatement(sql);
+			
+			preparedStatement.setInt(1, id);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			Livro livro = new Livro();
+			
+			if(rs.next()) {				
+				
+				livro.setId(rs.getInt(1));
+				livro.setTitulo(rs.getString(2));
+				livro.setIsbn(rs.getString(3));
+				livro.setEdicao(rs.getString(4));
+				livro.setVolume(rs.getString(5));
+				livro.setDataPublicacao(rs.getString(6));
+				livro.setLocalPublicacao(rs.getString(7));
+				livro.setIdadeRecomendada(rs.getInt(8));
+				livro.setCapa(rs.getString(9));
+				livro.setDescricao(rs.getString(10));
+				livro.setPreco(rs.getDouble(11));
+				livro.setAutor(rs.getInt(12));
+				livro.setEditora(rs.getInt(13));
+				livro.setCategoria(rs.getInt(14));
+				
+			}
+
+			return livro;
+
+		} finally {
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+		}
 	}
 
 	@Override
@@ -121,15 +167,17 @@ public class LivroDAO implements GenericDAO<Livro> {
 			SQLException {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String sql = "UPDATE BESTSELLER.LIVRO SET NM_TITULO = ?, CD_ISBN = ?, CD_EDICAO = ?, QT_VOLUME = ?, DT_PUBLICACAO = ?,"
-				+ "NM_LOCAL_PUBLICAO = ?,IDADE_RECOMENDADA = ?, ID_CAPA = ?, FK_AUTOR = ?, FK_EDITORA = ?, FK_CATEGORIA = ?  WHERE ID = ?; ";
-		
+				+ "NM_LOCAL_PUBLICAO = ?,IDADE_RECOMENDADA = ?, ID_CAPA = ?,DS_DESCRICAO = ?, VL_PRECO = ?, FK_AUTOR = ?, FK_EDITORA = ?,"
+				+ " FK_CATEGORIA = ?  WHERE ID = ?; ";
+
 		try {
-			
+
 			dbConnection = ConnectionFactory.getConnection();
-			preparedStatement = dbConnection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			
+			preparedStatement = dbConnection.prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
+
 			preparedStatement.setString(1, livro.getTitulo());
 			preparedStatement.setString(2, livro.getIsbn());
 			preparedStatement.setString(3, livro.getEdicao());
@@ -138,24 +186,21 @@ public class LivroDAO implements GenericDAO<Livro> {
 			preparedStatement.setString(6, livro.getLocalPublicacao());
 			preparedStatement.setInt(7, livro.getIdadeRecomendada());
 			preparedStatement.setString(8, livro.getCapa());
-			preparedStatement.setInt(9, livro.getAutor());
-			preparedStatement.setInt(10, livro.getEditora());
-			preparedStatement.setInt(11, livro.getCategoria());
-			preparedStatement.setInt(12, livro.getId());
-			
+			preparedStatement.setString(9, livro.getDescricao());
+			preparedStatement.setDouble(10, livro.getPreco());
+			preparedStatement.setInt(11, livro.getAutor());
+			preparedStatement.setInt(12, livro.getEditora());
+			preparedStatement.setInt(13, livro.getCategoria());
+			preparedStatement.setInt(14, livro.getId());
+
 			if (preparedStatement.executeUpdate() == 1) {
 				return true;
-			}
-			else
-			{
+			} else {
 				return false;
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			throw e;
-		}
-		finally {
+		} finally {
 			if (preparedStatement != null) {
 				preparedStatement.close();
 			}
@@ -204,5 +249,5 @@ public class LivroDAO implements GenericDAO<Livro> {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }

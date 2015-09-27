@@ -242,6 +242,16 @@
 											a:placeholder="Idade Recomendada" value="#{livroBean.livro.idadeRecomendada}"></h:inputText>
 									</div>
 									<div class="form-group">
+										<h:outputLabel value="Descrição do Livro"></h:outputLabel>
+										<h:inputText styleClass="form-control" maxlength="100"
+											a:placeholder="Descrição" value="#{livroBean.livro.descricao}"></h:inputText>
+									</div>
+									<div class="form-group">
+										<h:outputLabel value="Preço"></h:outputLabel>
+										<h:inputText styleClass="form-control"
+											a:placeholder="100.00" value="#{livroBean.livro.preco}"></h:inputText>
+									</div>
+									<div class="form-group">
 										<h:outputLabel value="Código da Capa"></h:outputLabel>
 										<h:selectOneMenu value="#{livroBean.livro.capa}" styleClass="form-control" style="width:100%">
 										   	<f:selectItem itemValue="1" itemLabel="A dança dos Dragões" />
@@ -249,7 +259,7 @@
 										   	<f:selectItem itemValue="3" itemLabel="The book of Threes" />
 										   	<f:selectItem itemValue="4" itemLabel="Lord of the king: The return of the King" />
 										</h:selectOneMenu>																													
-									</div>
+									</div>									
 									<div class="form-group">
 										<h:outputLabel value="Autor"></h:outputLabel>
 										<h:selectOneMenu styleClass="form-control" style="width:100%" value="#{livroBean.livro.autor}">

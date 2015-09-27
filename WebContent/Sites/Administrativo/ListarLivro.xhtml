@@ -215,7 +215,7 @@
 									rendered="#{not empty livroBean.listaLivro}">																			
 										<h:column>
 											<f:facet name="header">Titulo</f:facet>
-	    									<h:outputText value="#{livro.titulo}" rendered="#{not livro.editable}" />
+	    									<h:outputText value="#{livro.titulo}"  />
 										</h:column>										
 										<h:column>
 											<f:facet name="header">Autor</f:facet>
@@ -225,14 +225,14 @@
 										</h:column>												
 										<h:column>
 											<f:facet name="header">Categoria</f:facet>
-											<h:selectOneMenu disabled="true" styleClass="form-control" style="width:100%" value="#{livro.autor}">
-    											<f:selectItems value="#{livroBean.listaCategoria}" var="autor" itemValue="#{autor.id}" itemLabel="#{autor.nome}" />
+											<h:selectOneMenu disabled="true" styleClass="form-control" style="width:100%" value="#{livro.categoria}">
+    											<f:selectItems value="#{livroBean.listaCategoria}" var="categoria" itemValue="#{categoria.id}" itemLabel="#{categoria.nome}" />
 											</h:selectOneMenu>	
 										</h:column>
 										<h:column>
 											<f:facet name="header">Editora</f:facet>
-											<h:selectOneMenu disabled="true" styleClass="form-control" style="width:100%" value="#{livro.autor}">
-    											<f:selectItems value="#{livroBean.listaEditora}" var="autor" itemValue="#{autor.id}" itemLabel="#{autor.nome}" />
+											<h:selectOneMenu disabled="true" styleClass="form-control" style="width:100%" value="#{livro.editora}">
+    											<f:selectItems value="#{livroBean.listaEditora}" var="editora" itemValue="#{editora.id}" itemLabel="#{editora.nome}" />
 											</h:selectOneMenu>	
 										</h:column>
 										
