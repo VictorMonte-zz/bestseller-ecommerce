@@ -61,6 +61,54 @@ public class LivroDAO implements GenericDAO<Livro> {
 			}
 		}
 	}
+	
+	public List<Livro> getAll(String titulo) throws ClassNotFoundException, SQLException {
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+
+			dbConnection = ConnectionFactory.getConnection();
+
+			String sql = "SELECT * FROM bestseller.LIVRO WHERE NM_TITULO LIKE ?;";
+
+			preparedStatement = dbConnection.prepareStatement(sql);
+			preparedStatement.setString(1, titulo + "%");
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			List<Livro> lista = new ArrayList<Livro>();
+
+			while (rs.next()) {
+				Livro livro = new Livro();
+				livro.setId(rs.getInt(1));
+				livro.setTitulo(rs.getString(2));
+				livro.setIsbn(rs.getString(3));
+				livro.setEdicao(rs.getString(4));
+				livro.setVolume(rs.getString(5));
+				livro.setDataPublicacao(rs.getString(6));
+				livro.setLocalPublicacao(rs.getString(7));
+				livro.setIdadeRecomendada(rs.getInt(8));
+				livro.setCapa(rs.getString(9));
+				livro.setDescricao(rs.getString(10));
+				livro.setPreco(rs.getDouble(11));
+				livro.setAutor(rs.getInt(12));
+				livro.setEditora(rs.getInt(13));
+				livro.setCategoria(rs.getInt(14));
+
+				lista.add(livro);
+			}
+
+			return lista;
+
+		} finally {
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+		}
+	}
 
 	@Override
 	public Livro save(Livro livro) throws ClassNotFoundException, SQLException {

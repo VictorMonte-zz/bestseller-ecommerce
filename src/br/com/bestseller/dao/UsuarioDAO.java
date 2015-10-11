@@ -61,7 +61,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 		ResultSet resultSet = null;
 		
 		String sql = "INSERT INTO BESTSELLER.USUARIO (NM_USUARIO, CD_LOGIN, CD_SENHA, IS_ADMIN) "
-				+ "VALUES (?, ?, ?, 'S');";
+				+ "VALUES (?, ?, ?, ?);";
 
 		try {
 			dbConnection = ConnectionFactory.getConnection();
@@ -70,6 +70,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 			preparedStatement.setString(1, usuario.getNome());
 			preparedStatement.setString(2, usuario.getLogin());
 			preparedStatement.setString(3, usuario.getSenha());
+			preparedStatement.setString(4, usuario.getIsAdmin());
 			
 			if (preparedStatement.executeUpdate() == 1) {
 				// execute insert SQL stetement

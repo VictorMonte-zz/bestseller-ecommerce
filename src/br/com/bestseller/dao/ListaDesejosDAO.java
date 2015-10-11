@@ -18,8 +18,37 @@ public class ListaDesejosDAO implements GenericDAO<ListaDesejos> {
 	@Override
 	public List<ListaDesejos> getAll() throws ClassNotFoundException,
 			SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+
+			dbConnection = ConnectionFactory.getConnection();
+
+			String sql = "SELECT * FROM bestseller.listadesejo;";
+
+			preparedStatement = dbConnection.prepareStatement(sql);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			List<ListaDesejos> lista = new ArrayList<ListaDesejos>();
+
+			while (rs.next()) {
+				ListaDesejos l = new ListaDesejos();
+				l.setLivro(rs.getInt(1));
+				l.setUsuario(rs.getInt(2));
+				lista.add(l);
+			}
+
+			return lista;
+
+		} finally {
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+		}
 	}
 	
 	public List<ListaDesejos> getAllbyUser(int id) throws ClassNotFoundException,
@@ -65,7 +94,7 @@ public class ListaDesejosDAO implements GenericDAO<ListaDesejos> {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String sql = "INSERT INTO BESTSELLER.LISTADESEJO FK_LIVRO, FK_USUARIO) VALUES ( ?, ? );  ";
+		String sql = "INSERT INTO BESTSELLER.LISTADESEJO (FK_LIVRO, FK_USUARIO) VALUES ( ?, ? );  ";
 		try {
 			dbConnection = ConnectionFactory.getConnection();
 			preparedStatement = dbConnection.prepareStatement(sql,
@@ -114,10 +143,38 @@ public class ListaDesejosDAO implements GenericDAO<ListaDesejos> {
 	@Override
 	public boolean delete(ListaDesejos listaDesejos) throws ClassNotFoundException,
 			SQLException {
-		// TODO Auto-generated method stub
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+
+		String sqlDelete = "DELETE FROM BESTSELLER.LISTADESEJO WHERE FK_LIVRO = ? AND FK_USUARIO = ?;";
+
+		try {
+
+			dbConnection = ConnectionFactory.getConnection();
+			preparedStatement = dbConnection.prepareStatement(sqlDelete,
+					Statement.RETURN_GENERATED_KEYS);
+
+			preparedStatement.setInt(1, listaDesejos.getLivro());
+			preparedStatement.setInt(2, listaDesejos.getUsuario());
+
+			if (preparedStatement.executeUpdate() == 1) {
+				return true;
+			}
+
+		} finally {
+
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+		}
+
 		return false;
 	}
-
+	
 	@Override
 	public boolean deleteAll() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub

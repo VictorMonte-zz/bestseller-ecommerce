@@ -134,102 +134,51 @@
 
 	<div class="container main-container">
 		<div class="row">
-
-			<div class="col-lg-1 visible-lg">
-				<div class="row text-center">
-					<div class="col-lg-12 col-md-12 hero-feature">						
-					</div>
-				</div>
-			</div>
-				
-			<!-- Slider -->			
-			<div class="col-lg-9 col-md-12">
-				<div class="slider">
-					<ul class="bxslider">
-						<li><a href="index.html"> <img
-								src="images/banner1.jpg" alt="" />
-						</a></li>
-						<li><a href="index.html"> <img
-								src="images/banner2.jpg" alt="" />
-						</a></li>
-						<li><a href="index.html"> <img
-								src="images/banner3.jpg" alt="" />
-						</a></li>
-					</ul>
-				</div>
-			</div>			
-			<!-- End Slider -->
-		</div>
-
-		<div class="row">
-			<div class="col-lg-3 col-md-3 col-sm-12">
-
-				<!-- Categories -->
-				<div class="col-lg-12 col-md-12 col-sm-6">
-					<div class="no-padding">
-						<span class="title">Categorias</span>
-					</div>
-
-					<div id="main_menu">
-						<div class="list-group panel panel-cat">
-						<h:form>						
-							<h:commandLink action="#{bestSellerBean.filtrar(0)}" styleClass="list-group-item" value="Todas" />
-							<ui:repeat var="categoria" value="#{bestSellerBean.categorias}">
-								<h:commandLink action="#{bestSellerBean.filtrar(categoria.id)}" styleClass="list-group-item" value="#{categoria.nome}" />
-							</ui:repeat>
-						</h:form>							
-						</div>
-					</div>
-
-				</div>
-				<!-- End Categories -->				
-
-			</div>
-
-			<div class="clearfix visible-sm"></div>
-
-			<!-- Featured -->
-			<div class="col-lg-9 col-md-9 col-sm-12">
-				<div class="col-lg-12 col-sm-12">
-					<span class="title">Livros</span>
-				</div>
-				
-				<h:form>
-					<ui:repeat var="livro" value="#{bestSellerBean.livros}">
-						<div class="col-lg-4 col-sm-4 hero-feature text-center">
-							<div class="thumbnail">
-								<a href="detail.html" class="link-p"> <img
-									src="images/#{livro.capa}.jpg" alt=""></img>
-								</a>
-								<div class="caption prod-caption">
-									<h4>
-										<!-- <a href="detail.html">#{livro.titulo}</a> -->
-										<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}" value="#{livro.titulo}"></h:commandLink>
-									</h4>
-									<p>#{livro.descricao}</p>
-									<p>
-										<div class="btn-group">
-											<!-- <a href="#" class="btn btn-default">$ #{livro.preco}</a> <a href="#"
-												class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-												Buy</a> -->
-											<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}" value="$ #{livro.preco}"
-											styleClass="btn btn-default"></h:commandLink>											
-											<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}"
-											styleClass="btn btn-primary">
-											<i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Comprar</h:commandLink>
-										</div>
-									</p>
-								</div>
-							</div>
-						</div>
-					</ui:repeat>
-				</h:form>
-			</div>
-			<!-- End Featured -->
-
-			<div class="clearfix visible-sm"></div>
-
-		</div>
+			
+			<!-- Formulario de Busca  -->
+						
+			<!-- End Formulario de Busca -->
+			
+			<div class="col-lg-8 col-md-8 col-sm-8">
+	            <div class="white-container">
+	                <span class="title">Busca de Livros</span>	                	                
+	                <h:form>
+	                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">                        
+	                        <h:outputLabel value="Nome" ></h:outputLabel>                        
+	                        <h:inputText styleClass="form-control" value="#{bestSellerBean.titulo}"></h:inputText><br clear="all"/>	                        
+	                    </div>
+	                    
+	                    <h:commandButton styleClass="btn btn-danger" value="Buscar" action="#{bestSellerBean.buscar}"></h:commandButton>	                    
+                    		                    	                               	                    
+	                </h:form>	                
+	            </div>
+        	</div>
+		
+       
+			<!-- Cart -->
+	       	<div class="col-lg-9 col-md-9 col-sm-12">
+	       		<div class="col-lg-12 col-sm-12">
+	           		<span class="title">Resultado</span>
+	           	</div>
+	            <div class="col-lg-12 col-sm-12 hero-feature">
+					<h:form>
+						<h:dataTable value="#{bestSellerBean.listaBusca}" var="livro" 
+						rendered="#{not empty bestSellerBean.listaBusca}" styleClass="table table-bordered tbl-cart">
+							<h:column>
+								<f:facet name="header">Titulo</f:facet>								
+								<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}" value="#{livro.titulo}"></h:commandLink> 
+							</h:column>	
+							<h:column>
+								<f:facet name="header">Preço</f:facet>									
+								<h:outputText value="#{livro.preco}"/>
+							</h:column>	    							
+						</h:dataTable>	
+						<h:outputLabel value="Nenhum item pesquisado.." rendered="#{empty bestSellerBean.listaBusca}"></h:outputLabel>										
+					</h:form>					
+	            </div>
+	       	</div>
+	       	<!-- End Cart -->
+       </div>			
 	</div>
 
 	<footer>

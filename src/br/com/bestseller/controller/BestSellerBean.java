@@ -38,16 +38,23 @@ public class BestSellerBean {
 	private List<Autor> autores;
 	private List<Livro> carrinho;
 	private List<ListaDesejos> listaDesejos;
+	private List<Livro> listaBusca;
 
 	/* Objects */
 	private Livro livro;
 	private Usuario usuario;
+	private Double listaDesejosTotal;
+	private Double carrinhoTotal;
+	private String titulo;
 
 	public BestSellerBean() {
 
 		/* Objects */
 		this.livro = new Livro();
 		this.usuario = new Usuario();
+		this.listaDesejosTotal = 0.0;
+		this.carrinhoTotal = 0.0;
+		this.titulo = "";
 
 		/* Data Access */
 		this.livroDAO = new LivroDAO();
@@ -66,10 +73,19 @@ public class BestSellerBean {
 			this.listaDesejos = new ArrayList<ListaDesejos>();
 			// Nao fica no bd
 			this.carrinho = new ArrayList<Livro>();
+			this.listaBusca = new ArrayList<Livro>();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Double getListaDesejosTotal() {
+		return listaDesejosTotal;
+	}
+
+	public void setListaDesejosTotal(Double listaDesejosTotal) {
+		this.listaDesejosTotal = listaDesejosTotal;
 	}
 
 	public LivroDAO getLivroDAO() {
@@ -184,6 +200,30 @@ public class BestSellerBean {
 		this.usuario = usuario;
 	}
 
+	public Double getCarrinhoTotal() {
+		return carrinhoTotal;
+	}
+
+	public void setCarrinhoTotal(Double carrinhoTotal) {
+		this.carrinhoTotal = carrinhoTotal;
+	}
+
+	public List<Livro> getListaBusca() {
+		return listaBusca;
+	}
+
+	public void setListaBusca(List<Livro> listaBusca) {
+		this.listaBusca = listaBusca;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public String filtrar(int id) {
 
 		List<Livro> listaAux = null;
@@ -231,11 +271,11 @@ public class BestSellerBean {
 		return null;
 	}
 
-	public String addCarinho(int id) {
+	public String addCarinho() {
 
 		try {
 
-			this.carrinho.add(livroDAO.get(id));
+			this.carrinho.add(livroDAO.get(livro.getId()));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -251,20 +291,20 @@ public class BestSellerBean {
 			if (usuario.getLogin() == null || usuario.getLogin().isEmpty()
 					|| usuario.getSenha() == null
 					|| usuario.getSenha().isEmpty()) {
-				return "home.xhtml";
+				return "index";
 			}
 
 			// / Obter usuário
 			usuario = this.usuarioDAO.get(usuario.getLogin(),
 					usuario.getSenha());
-			
+
 			this.listaDesejos = listaDesejosDAO.getAllbyUser(usuario.getId());
 
-			return "home.xhtml";
+			return "index";
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "";
+			return "index";
 		}
 	}
 
@@ -272,8 +312,11 @@ public class BestSellerBean {
 
 		try {
 
-			// / Remove usuário de sessão
+			// Remove usuário de sessão
 			this.setUsuario(new Usuario());
+
+			// Remove o carrinho
+			this.setCarrinho(new ArrayList<Livro>());
 
 			return "home.xhtml";
 
@@ -283,13 +326,13 @@ public class BestSellerBean {
 		}
 	}
 
-	public String addListaDesejos(int livro, int usuario) {
+	public String addListaDesejos() {
 		try {
 
 			ListaDesejos desejo = new ListaDesejos();
-			desejo.setLivro(livro);
-			desejo.setUsuario(usuario);
-			
+			desejo.setLivro(livro.getId());
+			desejo.setUsuario(usuario.getId());
+
 			this.listaDesejos.add(this.listaDesejosDAO.save(desejo));
 
 		} catch (Exception e) {
@@ -299,4 +342,144 @@ public class BestSellerBean {
 		return null;
 	}
 
+	@SuppressWarnings("finally")
+	public String cadastrar() {
+		try {
+
+			usuario.setIsAdmin("N");
+
+			usuario = usuarioDAO.save(usuario);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return "index";
+		}
+	}
+
+	public String listarListaDesejos() {
+		try {
+
+			listaDesejos = listaDesejosDAO.getAll();
+			this.listaDesejosTotal = 0.0;
+
+			for (ListaDesejos lista : listaDesejos) {
+				if (lista != null) {
+					lista.setProduto(livroDAO.get(lista.getLivro()));
+				}
+
+				this.listaDesejosTotal += lista.getProduto().getPreco();
+			}
+
+			return "listadesejos";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public String removerListaDesejos(int id) {
+		try {
+
+			ListaDesejos l = new ListaDesejos();
+			l.setLivro(id);
+			l.setUsuario(usuario.getId());
+
+			if (listaDesejosDAO.delete(l)) {
+				this.listarListaDesejos();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
+	public String checkoutListaDesejos() {
+		try {
+
+			listaDesejos = listaDesejosDAO.getAll();
+
+			for (ListaDesejos lista : listaDesejos) {
+
+				this.carrinho.add(livroDAO.get(lista.getLivro()));
+
+				listaDesejosDAO.delete(lista);
+			}
+
+			this.listaDesejos = new ArrayList<ListaDesejos>();
+
+			return listarCarrinho();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public String removerItemDoCarrinho(Livro livro) {
+		try {
+
+			carrinho.remove(livro);
+
+			listarCarrinho();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public String listarCarrinho() {
+		try {
+
+			for (Livro l : carrinho) {
+				carrinhoTotal += l.getPreco();
+			}
+
+			return "checkout";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
+	public String finalizarCompra() {
+		try {
+
+			carrinho = new ArrayList<Livro>();
+
+			return "index";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public String buscar()
+	{
+		try {
+			
+			listaBusca = livroDAO.getAll(titulo);
+			
+			return "buscar";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
 }
