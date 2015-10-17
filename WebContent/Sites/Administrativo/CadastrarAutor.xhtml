@@ -214,56 +214,64 @@
 									<div class="form-group">
 										<h:outputLabel value="Nome do Autor"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Nome" 
-										value="#{autorBean.autor.nome}"></h:inputText>
+										value="#{autorBean.autor.nome}" required="true"
+										 requiredMessage="Necessário o nome do autor para o Autor"></h:inputText>
 									</div>									
 								</div>	
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Idioma"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Idioma" 
-										value="#{autorBean.autor.idioma}"></h:inputText>
+										value="#{autorBean.autor.idioma}" required="true"
+										requiredMessage="Necessário o idioma para o Autor">></h:inputText>
 									</div>									
 								</div>								
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Genêro"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Genêro" 
-										value="#{autorBean.autor.genero}"></h:inputText>
+										value="#{autorBean.autor.genero}" required="true"
+										requiredMessage="Necessário um genêro para o Autor">></h:inputText>
 									</div>									
 								</div>
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="País de Origem"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="País de Origem" 
-										value="#{autorBean.autor.paiorigem}"></h:inputText>
+										value="#{autorBean.autor.paiorigem}" required="true"
+										requiredMessage="Necessário o país de origem para o Autor">></h:inputText>
 									</div>									
 								</div>
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Data de Nascimento"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="01/01/0001" 
-										value="#{autorBean.autor.nascimento}"></h:inputText>
+										value="#{autorBean.autor.nascimento}" required="true"
+										requiredMessage="Necessário a data de nascimento para o Autor"></h:inputText>
 									</div>									
 								</div>
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Quantidade de Obras"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Quantidade de Obras" 
-										value="#{autorBean.autor.quantidadeObras}"></h:inputText>
+										value="#{autorBean.autor.quantidadeObras}" required="true"
+										requiredMessage="Necessário as obras do Autor"></h:inputText>
 									</div>									
 								</div>
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Nível Escolar"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Nível Escolar" 
-										value="#{autorBean.autor.nivelEscolar}"></h:inputText>
+										value="#{autorBean.autor.nivelEscolar}" required="true"
+										requiredMessage="Necessário o nível escolar do Autor"></h:inputText>
 									</div>									
 								</div>
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Endereço"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Endereço" 
-										value="#{autorBean.autor.endereco}"></h:inputText>
+										value="#{autorBean.autor.endereco}" required="true"
+										requiredMessage="Necessário o endereço para o Autor"></h:inputText>
 									</div>									
 								</div>
 								<div class="box-body">
@@ -280,6 +288,9 @@
 										value="#{autorBean.autor.premios}"></h:inputText>
 									</div>									
 								</div>
+								
+								<h:messages style="color:red"></h:messages>
+								
 								<div class="box-footer">
 									<div class="pull-right">
 										<h:commandButton value="Salvar" styleClass="btn btn-primary" 

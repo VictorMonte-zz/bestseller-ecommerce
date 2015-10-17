@@ -33,30 +33,12 @@
 			<!-- Logo -->
 			<div class="col-lg-4 col-md-3 hidden-sm hidden-xs">
 				<div class="well logo">
-					<a href="index.html"> BestSeller <span>Online Library</span>
+					<a href="index.html"> BestSeller <span>Online #{msg.livraria}</span>
 					</a>
-					<div>Os melhores livros com os melhores preços.</div>
+					<div>#{msg.subtitulo}</div>
 				</div>
 			</div>
-			<!-- End Logo -->
-
-			<!-- Search Form -->
-			<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
-				<div class="well">
-					<!-- <form action="">
-						<div class="input-group">
-							<input type="text" class="form-control input-search"
-								placeholder="Busque seu livro aqui..." /> <span
-								class="input-group-btn">
-								<button class="btn btn-default no-border-left" type="submit">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-						</div>
-					</form> -->					
-				</div>
-			</div>
-			<!-- End Search Form -->
+			<!-- End Logo -->			
 			
 		</div>
 	</div>
@@ -80,7 +62,7 @@
 			<h:form>
 				<ul class="nav navbar-nav">
 					<li>						
-						<h:commandLink action="home" value="Home" />						
+						<h:commandLink action="index" value="home" />						
 					</li>				
 					<li>
 						<h:commandLink action="#{bestSellerBean.listarListaDesejos}" rendered="#{bestSellerBean.usuario.id != ''}" value="Lista de desejo" />					
@@ -89,7 +71,7 @@
 						<h:commandLink action="#{bestSellerBean.listarCarrinho}" rendered="#{bestSellerBean.usuario.id != ''}" value="Carrinho" />
 					</li>
 					<li>
-						<h:commandLink action="buscar" value="Buscar" />
+						<h:commandLink action="buscar" value="#{msg.buscar}" />
 					</li>				
 				</ul>
 			</h:form>
@@ -100,7 +82,7 @@
 						<div class="form-group">
 							<div style="font-family:'open_sanscondensed_light';
 							font-size: 20px;text-transform: uppercase;color: #fff!important;">
-								Bem vindo, <h:outputLabel value="#{bestSellerBean.usuario.nome}"></h:outputLabel>
+								#{msg.bemvindo}, <h:outputLabel value="#{bestSellerBean.usuario.nome}"></h:outputLabel>
 								<h:commandLink action="#{bestSellerBean.deslogar}">
     								<span class="glyphicon glyphicon-log-out"></span>
 								</h:commandLink>			
@@ -110,19 +92,25 @@
 					
 				</c:when>
 				<c:otherwise>
-					<h:form class="navbar-form navbar-right">
+					<h:form id="FormularioLogin" class="navbar-form navbar-right">
+						<div style="float:left;z-index:9999">
+							<h:messages id=	"msgLogin" style="color:red"></h:messages>							
+						</div>						
 			            <div class="form-group">							
-			              	<h:inputText a:placeholder="Login" value="#{bestSellerBean.usuario.login}" styleClass="form-control">
+			              	<h:inputText a:placeholder="#{msg.login}" value="#{bestSellerBean.usuario.login}" 
+			              	styleClass="form-control" required="true" requiredMessage="#{msg.loginInvalido}">
 			              	</h:inputText>
 			            </div>
 			            <div class="form-group">				              
-				              <h:inputSecret a:placeholder="Senha" value="#{bestSellerBean.usuario.senha}" styleClass="form-control">
+				              <h:inputSecret a:placeholder="#{msg.senha}" value="#{bestSellerBean.usuario.senha}"
+				               styleClass="form-control" required="true" requiredMessage="#{msg.senhaInvalida}">
 				              </h:inputSecret>
 			            </div>			            		            
-			            <h:commandButton styleClass="btn btn-primary" action="#{bestSellerBean.logar}" value="Logar"></h:commandButton>
+			            <h:commandButton styleClass="btn btn-primary" action="#{bestSellerBean.logar}" value="#{msg.logar}"></h:commandButton>
 			            &nbsp;			            
-			            <h:link value="Cadastre-me" outcome="CadastrarUsuario"></h:link>			            		            
+			            <h:link value="#{msg.cadastreme}" outcome="CadastrarUsuario"></h:link>			            			            		            
         			</h:form>
+        			
 				</c:otherwise>
 			</c:choose>	
 			
@@ -167,7 +155,7 @@
 				<!-- Categories -->
 				<div class="col-lg-12 col-md-12 col-sm-6">
 					<div class="no-padding">
-						<span class="title">Categorias</span>
+						<span class="title">#{msg.categorias}</span>
 					</div>
 
 					<div id="main_menu">
@@ -191,7 +179,7 @@
 			<!-- Featured -->
 			<div class="col-lg-9 col-md-9 col-sm-12">
 				<div class="col-lg-12 col-sm-12">
-					<span class="title">Livros</span>
+					<span class="title">#{msg.livros}</span>
 				</div>
 				
 				<h:form>
@@ -216,7 +204,7 @@
 											styleClass="btn btn-default"></h:commandLink>											
 											<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}"
 											styleClass="btn btn-primary">
-											<i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Comprar</h:commandLink>
+											<i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;#{msg.comprar}</h:commandLink>
 										</div>
 									</p>
 								</div>

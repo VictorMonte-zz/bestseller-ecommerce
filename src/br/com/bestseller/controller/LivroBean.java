@@ -131,52 +131,23 @@ public class LivroBean {
 	public String cadastrar() {
 
 		try {
-
-			// / Validar dados de cadastro
-			if (livro.getTitulo() == null || livro.getTitulo().isEmpty()
-					|| livro.getIsbn() == null || livro.getIsbn().isEmpty()
-					|| livro.getEdicao() == null || livro.getEdicao().isEmpty()
-					|| livro.getVolume() == null || livro.getVolume().isEmpty()
-					|| livro.getDataPublicacao() == null
-					|| livro.getDataPublicacao().isEmpty()
-					|| livro.getLocalPublicacao() == null
-					|| livro.getLocalPublicacao().isEmpty()					
-					|| livro.getIdadeRecomendada() == 0
-					|| livro.getCapa() == null
-					|| livro.getCapa().isEmpty()
-					|| livro.getDescricao() == null
-					|| livro.getDescricao().isEmpty()
-					|| livro.getPreco() == 0
-					|| livro.getAutor() == 0 
-					|| livro.getEditora() == 0
-					|| livro.getCategoria() == 0) {
-				
-				this.mensagem = "Campo Inválido";
-			}
-			else
-			{
-				if (livro.getId() != 0) {
-					if(livroDAO.update(livro))
-					{
-						this.mensagem = "Atualização realizado com sucesso.";		
-					}
-					else
-					{
-						this.mensagem = "Falha na atualização.";
-					}
-				}
-				else
-				{
-					livro = this.livroDAO.save(livro);
-					
-					this.mensagem = "Cadastro realizado com sucesso.";
-				}
-			}			
 			
+			if (livro.getId() != 0) {
+				if (livroDAO.update(livro)) {
+					this.mensagem = "Atualização realizado com sucesso.";
+				} else {
+					this.mensagem = "Falha na atualização.";
+				}
+			} else {
+				livro = this.livroDAO.save(livro);
+
+				this.mensagem = "Cadastro realizado com sucesso.";
+			}
+
 			return "CadastrarLivro";
 
 		} catch (Exception e) {
-			e.printStackTrace();			
+			e.printStackTrace();
 		}
 
 		return null;
@@ -184,7 +155,7 @@ public class LivroBean {
 
 	public String listar() {
 		try {
-			
+
 			listaAutor = autorDAO.getAll();
 			listaCategoria = categoriaDAO.getAll();
 			listaEditora = editoraDAO.getAll();
@@ -220,7 +191,7 @@ public class LivroBean {
 	public String carregarCadastro() {
 		try {
 			this.livro = new Livro();
-			
+
 			listaAutor = autorDAO.getAll();
 			listaCategoria = categoriaDAO.getAll();
 			listaEditora = editoraDAO.getAll();
@@ -234,20 +205,19 @@ public class LivroBean {
 		return null;
 	}
 
-	public String carregarEdicao(Livro livro)
-	{
+	public String carregarEdicao(Livro livro) {
 		try {
-			
+
 			this.mensagem = "";
-			
+
 			this.livro = livro;
-			
+
 			return "CadastrarLivro";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
-		
+
 	}
 }

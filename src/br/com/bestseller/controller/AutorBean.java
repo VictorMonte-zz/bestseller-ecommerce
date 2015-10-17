@@ -57,29 +57,6 @@ public class AutorBean {
 	public String cadastrar() {
 
 		try {
-
-			// / Validar dados de cadastro
-			if (autor.getNome() == null 
-				|| autor.getNome().isEmpty()
-				|| autor.getIdioma() == null
-				|| autor.getIdioma().isEmpty()
-				|| autor.getGenero() == null
-				|| autor.getGenero().isEmpty()
-				|| autor.getPaiorigem() == null
-				|| autor.getPaiorigem().isEmpty()
-				|| autor.getNascimento() == null
-				|| autor.getPaiorigem().isEmpty()
-				|| autor.getNascimento() == null
-				|| autor.getNascimento().isEmpty()				
-				|| autor.getNivelEscolar() == null
-				|| autor.getNivelEscolar().isEmpty()
-				|| autor.getEndereco() == null
-				|| autor.getEndereco().isEmpty()								
-				) {
-				this.mensagem = "Campo inválido";
-				
-				return "cadastrar";
-			}
 			
 			this.mensagem = "Cadastro realizado com sucesso";
 

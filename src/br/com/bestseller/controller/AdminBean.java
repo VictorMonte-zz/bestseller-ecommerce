@@ -3,8 +3,10 @@ package br.com.bestseller.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.bestseller.dao.UsuarioDAO;
 import br.com.bestseller.model.Usuario;
@@ -102,16 +104,7 @@ public class AdminBean {
 	
 	public String logar() {
 
-		try {
-			/// Validar dados de Login
-			if ((admin.getLogin() == null || admin.getLogin().isEmpty())
-					|| admin.getSenha() == null
-					|| admin.getSenha().isEmpty()) {
-				
-				this.mensagem = "Preencha todos os campos.";
-				
-				return "login";
-			}
+		try {			
 			
 			/// Bucar usuário
 			admin = this.adminDAO.get(admin.getLogin(),
@@ -119,7 +112,10 @@ public class AdminBean {
 			
 			if (admin == null) {
 				
-				this.mensagem = "Senha/Login Inválido";
+				FacesContext context = FacesContext.getCurrentInstance();
+				
+				FacesMessage errorMessage = new FacesMessage("Login ou Senha inválidos.");
+				context.addMessage("FormularioLogin:msgLogin", errorMessage);
 				
 				admin = new Usuario();
 				

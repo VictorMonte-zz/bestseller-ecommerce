@@ -214,23 +214,27 @@
 									<div class="form-group">
 										<h:outputLabel value="Nome"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Nome" 
-										value="#{adminBean.admin.nome}"></h:inputText>
+										value="#{adminBean.admin.nome}" required="true" 
+										requiredMessage="Necessário o nome do administrador"></h:inputText>
 									</div>									
 								</div>
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Login"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Login" 
-										value="#{adminBean.admin.login}"></h:inputText>
+										value="#{adminBean.admin.login}" required="true"
+										requiredMessage="Necessário o login do administrador"></h:inputText>
 									</div>									
 								</div>
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Senha"></h:outputLabel>
 										<h:inputSecret styleClass="form-control" a:placeholder="Senha" 
-										value="#{adminBean.admin.senha}"></h:inputSecret>
+										value="#{adminBean.admin.senha}" required="true" requiredMessage="Necessário a senha do administrador"></h:inputSecret>
 									</div>									
 								</div>
+								
+								<h:messages style="color:red"></h:messages>								
 
 								<div class="box-footer">
 									<div class="pull-right">

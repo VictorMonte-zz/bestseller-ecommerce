@@ -53,35 +53,7 @@ public class EditoraBean implements Serializable {
 	}
 	
 	public String cadastrar() {
-		try {
-			if (editora.getNome() == null
-					|| editora.getNome().isEmpty()
-					|| editora.getTipo() == null 
-					|| editora.getTipo().isEmpty()
-					|| editora.getGenero() == null
-					|| editora.getGenero().isEmpty()
-					|| editora.getFundacao() == null							
-					|| editora.getFundacao().isEmpty()
-					|| editora.getSede() == null 
-					|| editora.getSede().isEmpty()
-					|| editora.getProprietario() == null
-					|| editora.getProprietario().isEmpty()
-					|| editora.getProdutos() == null
-					|| editora.getProdutos().isEmpty()
-					|| editora.getSiteOficial() == null
-					|| editora.getSiteOficial().isEmpty()
-					|| editora.getContato() == null
-					|| editora.getContato().isEmpty()					
-					|| editora.getFundacao() == null
-					|| editora.getFundacao().isEmpty()
-					|| editora.getPessoasChave() == null
-					|| editora.getPessoasChave().isEmpty()) {
-				
-				
-				this.mensagem = "Campo inválido";
-						
-				return "CadastrarEditora";
-			}
+		try {			
 
 			editora = editoraDAO.save(editora);
 			

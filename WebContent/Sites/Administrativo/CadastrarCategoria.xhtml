@@ -214,9 +214,12 @@
 									<div class="form-group">
 										<h:outputLabel value="Nome da Categoria"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Nome" 
-										value="#{categoriaBean.categoria.nome}"></h:inputText>
+										value="#{categoriaBean.categoria.nome}" required="true"
+										 requiredMessage="Necessário informar o nome da categoria."></h:inputText>
 									</div>									
 								</div>
+								
+								<h:messages style="color:red"></h:messages>
 
 								<div class="box-footer">
 									<div class="pull-right">
@@ -228,6 +231,8 @@
 									</c:if>
 								</div>
 							</h:form>
+							
+							
 							
 						</div>
 					</div>

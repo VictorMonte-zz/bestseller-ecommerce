@@ -126,6 +126,10 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 				usuario.setSenha(rs.getString("CD_SENHA"));
 				usuario.setIsAdmin(rs.getString("IS_ADMIN"));
 			}
+			else
+			{
+				return null;
+			}
 			return usuario;
 		} finally {
 			if (preparedStatement != null) {

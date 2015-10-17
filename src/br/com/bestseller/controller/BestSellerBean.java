@@ -3,8 +3,10 @@ package br.com.bestseller.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.bestseller.dao.AutorDAO;
 import br.com.bestseller.dao.CategoriaDAO;
@@ -287,16 +289,20 @@ public class BestSellerBean {
 	public String logar() {
 		try {
 
-			// / Validar dados de Login
-			if (usuario.getLogin() == null || usuario.getLogin().isEmpty()
-					|| usuario.getSenha() == null
-					|| usuario.getSenha().isEmpty()) {
-				return "index";
-			}
-
 			// / Obter usuário
 			usuario = this.usuarioDAO.get(usuario.getLogin(),
 					usuario.getSenha());
+			
+			if (usuario == null) {
+				FacesContext context = FacesContext.getCurrentInstance();
+				
+				FacesMessage errorMessage = new FacesMessage("Login ou Senha inválidos.");
+				context.addMessage("FormularioLogin:msgLogin", errorMessage);
+				
+				usuario = new Usuario();
+				
+				return "index";
+			}
 
 			this.listaDesejos = listaDesejosDAO.getAllbyUser(usuario.getId());
 
@@ -438,6 +444,8 @@ public class BestSellerBean {
 
 	public String listarCarrinho() {
 		try {
+			
+			carrinhoTotal = 0.0;
 
 			for (Livro l : carrinho) {
 				carrinhoTotal += l.getPreco();

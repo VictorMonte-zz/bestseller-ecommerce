@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 <meta name="description" content=""></meta>
 <meta name="author" content=""></meta>
-<title>Home - BestSeller</title>
+<title>#{msg.BuscaTitulo} - BestSeller</title>
 
 <link href="css/bootstrap.css" rel="stylesheet"></link>
 <link rel="stylesheet"
@@ -33,30 +33,12 @@
 			<!-- Logo -->
 			<div class="col-lg-4 col-md-3 hidden-sm hidden-xs">
 				<div class="well logo">
-					<a href="index.html"> BestSeller <span>Online Library</span>
+					<a href="index.html"> BestSeller <span>Online #{msg.livraria}</span>
 					</a>
-					<div>Os melhores livros com os melhores preços.</div>
+					<div>#{msg.subtitulo}</div>
 				</div>
 			</div>
-			<!-- End Logo -->
-
-			<!-- Search Form -->
-			<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
-				<div class="well">
-					<!-- <form action="">
-						<div class="input-group">
-							<input type="text" class="form-control input-search"
-								placeholder="Busque seu livro aqui..." /> <span
-								class="input-group-btn">
-								<button class="btn btn-default no-border-left" type="submit">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-						</div>
-					</form> -->					
-				</div>
-			</div>
-			<!-- End Search Form -->
+			<!-- End Logo -->			
 			
 		</div>
 	</div>
@@ -80,7 +62,7 @@
 			<h:form>
 				<ul class="nav navbar-nav">
 					<li>						
-						<h:commandLink action="home" value="Home" />						
+						<h:commandLink action="index" value="home" />							
 					</li>				
 					<li>
 						<h:commandLink action="#{bestSellerBean.listarListaDesejos}" rendered="#{bestSellerBean.usuario.id != ''}" value="Lista de desejo" />					
@@ -89,7 +71,7 @@
 						<h:commandLink action="#{bestSellerBean.listarCarrinho}" rendered="#{bestSellerBean.usuario.id != ''}" value="Carrinho" />
 					</li>
 					<li>
-						<h:commandLink action="buscar" value="Buscar" />
+						<h:commandLink action="buscar" value="#{msg.buscar}" />
 					</li>				
 				</ul>
 			</h:form>
@@ -100,7 +82,7 @@
 						<div class="form-group">
 							<div style="font-family:'open_sanscondensed_light';
 							font-size: 20px;text-transform: uppercase;color: #fff!important;">
-								Bem vindo, <h:outputLabel value="#{bestSellerBean.usuario.nome}"></h:outputLabel>
+								#{msg.bemvindo}, <h:outputLabel value="#{bestSellerBean.usuario.nome}"></h:outputLabel>
 								<h:commandLink action="#{bestSellerBean.deslogar}">
     								<span class="glyphicon glyphicon-log-out"></span>
 								</h:commandLink>			
@@ -110,18 +92,23 @@
 					
 				</c:when>
 				<c:otherwise>
-					<h:form class="navbar-form navbar-right">
+					<h:form id="FormularioLogin" class="navbar-form navbar-right">
+						<div style="float:left;z-index:9999">
+							<h:messages id=	"msgLogin" style="color:red"></h:messages>							
+						</div>						
 			            <div class="form-group">							
-			              	<h:inputText a:placeholder="Login" value="#{bestSellerBean.usuario.login}" styleClass="form-control">
+			              	<h:inputText a:placeholder="#{msg.login}" value="#{bestSellerBean.usuario.login}" 
+			              	styleClass="form-control" required="true" requiredMessage="#{msg.loginInvalido}">
 			              	</h:inputText>
 			            </div>
 			            <div class="form-group">				              
-				              <h:inputSecret a:placeholder="Senha" value="#{bestSellerBean.usuario.senha}" styleClass="form-control">
+				              <h:inputSecret a:placeholder="#{msg.senha}" value="#{bestSellerBean.usuario.senha}"
+				               styleClass="form-control" required="true" requiredMessage="#{msg.senhaInvalida}">
 				              </h:inputSecret>
 			            </div>			            		            
-			            <h:commandButton styleClass="btn btn-primary" action="#{bestSellerBean.logar}" value="Logar"></h:commandButton>
+			            <h:commandButton styleClass="btn btn-primary" action="#{bestSellerBean.logar}" value="#{msg.logar}"></h:commandButton>
 			            &nbsp;			            
-			            <h:link value="Cadastre-me" outcome="CadastrarUsuario"></h:link>			            		            
+			            <h:link value="#{msg.cadastreme}" outcome="CadastrarUsuario"></h:link>			            			            		            
         			</h:form>
 				</c:otherwise>
 			</c:choose>	
@@ -141,15 +128,12 @@
 			
 			<div class="col-lg-8 col-md-8 col-sm-8">
 	            <div class="white-container">
-	                <span class="title">Busca de Livros</span>	                	                
-	                <h:form>
-	                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">                        
-	                        <h:outputLabel value="Nome" ></h:outputLabel>                        
-	                        <h:inputText styleClass="form-control" value="#{bestSellerBean.titulo}"></h:inputText><br clear="all"/>	                        
-	                    </div>
-	                    
-	                    <h:commandButton styleClass="btn btn-danger" value="Buscar" action="#{bestSellerBean.buscar}"></h:commandButton>	                    
-                    		                    	                               	                    
+	                <span class="title">#{msg.BuscaTitulo}</span>	                	                
+	                <h:form>	                                            
+                        <h:outputLabel value="#{msg.LivroTitulo}" ></h:outputLabel>                        
+                        <h:inputText styleClass="form-control" value="#{bestSellerBean.titulo}"></h:inputText><br clear="all"/>
+                                                                    
+                 		<h:commandButton styleClass="btn btn-danger" value="#{msg.buscar}" action="#{bestSellerBean.buscar}"></h:commandButton>                    		                    	                               	                    
 	                </h:form>	                
 	            </div>
         	</div>
@@ -158,22 +142,22 @@
 			<!-- Cart -->
 	       	<div class="col-lg-9 col-md-9 col-sm-12">
 	       		<div class="col-lg-12 col-sm-12">
-	           		<span class="title">Resultado</span>
+	           		<span class="title">#{msg.LivroResultado}</span>
 	           	</div>
 	            <div class="col-lg-12 col-sm-12 hero-feature">
 					<h:form>
 						<h:dataTable value="#{bestSellerBean.listaBusca}" var="livro" 
 						rendered="#{not empty bestSellerBean.listaBusca}" styleClass="table table-bordered tbl-cart">
 							<h:column>
-								<f:facet name="header">Titulo</f:facet>								
+								<f:facet name="header">#{msg.LivroTitulo}</f:facet>								
 								<h:commandLink action="#{bestSellerBean.detalhar(livro.id)}" value="#{livro.titulo}"></h:commandLink> 
 							</h:column>	
 							<h:column>
-								<f:facet name="header">Preço</f:facet>									
+								<f:facet name="header">#{msg.LivroPreco}</f:facet>									
 								<h:outputText value="#{livro.preco}"/>
 							</h:column>	    							
 						</h:dataTable>	
-						<h:outputLabel value="Nenhum item pesquisado.." rendered="#{empty bestSellerBean.listaBusca}"></h:outputLabel>										
+						<h:outputLabel value="#{msg.MensageItemNaoEncontrado}" rendered="#{empty bestSellerBean.listaBusca}"></h:outputLabel>										
 					</h:form>					
 	            </div>
 	       	</div>
@@ -196,7 +180,7 @@
 		</div> -->
 		<div class="col-lg-3 col-md-3 col-sm-6">
 			<div class="column">
-				<h4>Categorias</h4>
+				<h4>#{msg.categorias}</h4>
 				<ul>
 					<h:form>
 						<h:commandLink action="#{bestSellerBean.filtrar(0)}" value="Todas" />

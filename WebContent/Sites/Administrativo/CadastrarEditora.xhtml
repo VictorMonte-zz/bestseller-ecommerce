@@ -214,59 +214,61 @@
 									<div class="form-group">
 										<h:outputLabel value="Nome"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Nome" 
-										value="#{editoraBean.editora.nome}"></h:inputText>
+										value="#{editoraBean.editora.nome}" required="true" requiredMessage="Necessário o nome da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Tipo"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Tipo" 
-										value="#{editoraBean.editora.tipo}"></h:inputText>
+										value="#{editoraBean.editora.tipo}" required="true" requiredMessage="Necessário o tipo da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Genêro"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Genêro" 
-										value="#{editoraBean.editora.genero}"></h:inputText>
+										value="#{editoraBean.editora.genero}" required="true" requiredMessage="Necessário o genêro da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Data de Fundação"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="01/01/0001" 
-										value="#{editoraBean.editora.fundacao}"></h:inputText>
+										value="#{editoraBean.editora.fundacao}" required="true" requiredMessage="Necessário a data de fundação da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Sede"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Sede" 
-										value="#{editoraBean.editora.sede}"></h:inputText>
+										value="#{editoraBean.editora.sede}" required="true" requiredMessage="Necessário a sede da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Proprietário"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Proprietário" 
-										value="#{editoraBean.editora.proprietario}"></h:inputText>
+										value="#{editoraBean.editora.proprietario}" required="true" requiredMessage="Necessário o nome do proprietário da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Produtos"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Produtos" 
-										value="#{editoraBean.editora.produtos}"></h:inputText>
+										value="#{editoraBean.editora.produtos}" required="true" requiredMessage="Necessário o nome dos produtos da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Site Oficial"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Site Oficial" 
-										value="#{editoraBean.editora.siteOficial}"></h:inputText>
+										value="#{editoraBean.editora.siteOficial}" required="true" requiredMessage="Necessário o site oficial da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Contato"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Contato" 
-										value="#{editoraBean.editora.contato}"></h:inputText>
+										value="#{editoraBean.editora.contato}" required="true" requiredMessage="Necessário o nome da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Faturamento"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Faturamento" 
-										value="#{editoraBean.editora.faturamento}"></h:inputText>
+										value="#{editoraBean.editora.faturamento}" required="true" requiredMessage="Necessário o valor do faturamento da editora"></h:inputText>
 									</div>
 									<div class="form-group">
 										<h:outputLabel value="Pessoas-Chave"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Pessosas-Chave" 
-										value="#{editoraBean.editora.pessoasChave}"></h:inputText>
+										value="#{editoraBean.editora.pessoasChave}" required="true" requiredMessage="Necessário o nome das pessoas-chave da editora"></h:inputText>
 									</div>																		
 								</div>
+
+								<h:messages style="color:red"></h:messages>
 
 								<div class="box-footer">
 									<div class="pull-right">
