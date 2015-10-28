@@ -287,18 +287,14 @@
 										<h:inputText styleClass="form-control" a:placeholder="Prêmios" 
 										value="#{autorBean.autor.premios}"></h:inputText>
 									</div>									
-								</div>
-								
-								<h:messages style="color:red"></h:messages>
+								</div>								
 								
 								<div class="box-footer">
 									<div class="pull-right">
 										<h:commandButton value="Salvar" styleClass="btn btn-primary" 
 										action="#{autorBean.cadastrar}" />
 									</div>
-									<c:if test="#{autorBean.mensagem != ''}">
-											<h:outputText value="#{autorBean.mensagem}"></h:outputText>
-									</c:if>	
+									<h:messages style="color:red"></h:messages>
 								</div>
 							</h:form>
 							

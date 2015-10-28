@@ -209,32 +209,40 @@
 							<!-- /.box-header -->
 							
 							<!-- form start -->
-							<h:form>
+							<h:form id="frmAdmin">
 								<div class="box-body">
 									<div class="form-group">
 										<h:outputLabel value="Nome"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Nome" 
-										value="#{adminBean.admin.nome}" required="true" 
+										value="#{adminBean.novoAdmin.nome}" required="true" 
 										requiredMessage="Necessário o nome do administrador"></h:inputText>
-									</div>									
-								</div>
-								<div class="box-body">
+									</div>
+									
 									<div class="form-group">
 										<h:outputLabel value="Login"></h:outputLabel>
 										<h:inputText styleClass="form-control" a:placeholder="Login" 
-										value="#{adminBean.admin.login}" required="true"
+										value="#{adminBean.novoAdmin.login}" required="true"
 										requiredMessage="Necessário o login do administrador"></h:inputText>
-									</div>									
-								</div>
-								<div class="box-body">
+									</div>
+									
 									<div class="form-group">
 										<h:outputLabel value="Senha"></h:outputLabel>
 										<h:inputSecret styleClass="form-control" a:placeholder="Senha" 
-										value="#{adminBean.admin.senha}" required="true" requiredMessage="Necessário a senha do administrador"></h:inputSecret>
-									</div>									
-								</div>
+										value="#{adminBean.novoAdmin.senha}" required="true" 
+										requiredMessage="Necessário a senha do administrador"></h:inputSecret>
+									</div>
+									
+									<div class="form-group">
+										<h:outputLabel value="E-mail"></h:outputLabel>
+										<h:inputText styleClass="form-control" a:placeholder="teste@teste.com" 
+										value="#{adminBean.novoAdmin.email}" required="true"
+										requiredMessage="Necessário o e-mail do administrador"
+										validator="#{adminBean.validateEmail}"></h:inputText>
+									</div>
+																											
+								</div>								
 								
-								<h:messages style="color:red"></h:messages>								
+								<h:messages id="msgAdmin" style="color:red"></h:messages>								
 
 								<div class="box-footer">
 									<div class="pull-right">

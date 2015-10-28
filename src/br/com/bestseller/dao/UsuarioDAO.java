@@ -38,6 +38,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 				usuario.setLogin(rs.getString(3));
 				usuario.setIsAdmin(rs.getString(4));
 				usuario.setIsAdmin(rs.getString(5));
+				usuario.setEmail(rs.getString(6));
 				lista.add(usuario);
 			}
 
@@ -60,8 +61,8 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
-		String sql = "INSERT INTO BESTSELLER.USUARIO (NM_USUARIO, CD_LOGIN, CD_SENHA, IS_ADMIN) "
-				+ "VALUES (?, ?, ?, ?);";
+		String sql = "INSERT INTO BESTSELLER.USUARIO (NM_USUARIO, CD_LOGIN, CD_SENHA, IS_ADMIN,EMAIL) "
+				+ "VALUES (?, ?, ?, ?, ?);";
 
 		try {
 			dbConnection = ConnectionFactory.getConnection();
@@ -71,6 +72,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 			preparedStatement.setString(2, usuario.getLogin());
 			preparedStatement.setString(3, usuario.getSenha());
 			preparedStatement.setString(4, usuario.getIsAdmin());
+			preparedStatement.setString(5, usuario.getEmail());
 			
 			if (preparedStatement.executeUpdate() == 1) {
 				// execute insert SQL stetement
@@ -125,6 +127,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 				usuario.setLogin(rs.getString("CD_LOGIN"));
 				usuario.setSenha(rs.getString("CD_SENHA"));
 				usuario.setIsAdmin(rs.getString("IS_ADMIN"));
+				usuario.setEmail(rs.getString("EMAIL"));
 			}
 			else
 			{
@@ -147,7 +150,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String sql = "UPDATE BESTSELLER.USUARIO  SET NM_USUARIO = ?, CD_LOGIN = ?, CD_SENHA = ?, IS_ADMIN = ? WHERE ID = ?;  ";
+		String sql = "UPDATE BESTSELLER.USUARIO  SET NM_USUARIO = ?, CD_LOGIN = ?, CD_SENHA = ?, IS_ADMIN = ?,EMAIL = ? WHERE ID = ?;  ";
 		
 		try {
 			
@@ -158,7 +161,8 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 			preparedStatement.setString(2, admin.getLogin());
 			preparedStatement.setString(3, admin.getSenha());
 			preparedStatement.setString(4, admin.getIsAdmin());
-			preparedStatement.setInt(5, admin.getId());
+			preparedStatement.setString(5, admin.getEmail());
+			preparedStatement.setInt(6, admin.getId());
 			
 			if (preparedStatement.executeUpdate() == 1) {
 				return true;

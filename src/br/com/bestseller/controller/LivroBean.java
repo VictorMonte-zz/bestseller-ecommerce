@@ -3,8 +3,10 @@ package br.com.bestseller.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.bestseller.dao.AutorDAO;
 import br.com.bestseller.dao.CategoriaDAO;
@@ -130,18 +132,27 @@ public class LivroBean {
 
 	public String cadastrar() {
 
+		FacesContext context = FacesContext.getCurrentInstance();
+		
 		try {
 			
 			if (livro.getId() != 0) {
 				if (livroDAO.update(livro)) {
-					this.mensagem = "Atualização realizado com sucesso.";
+					
+					FacesMessage errorMessage = new FacesMessage("Atualização realizada com sucesso!");
+					context.addMessage("", errorMessage);
+					
 				} else {
-					this.mensagem = "Falha na atualização.";
+					
+					FacesMessage errorMessage = new FacesMessage("Falha na atualização.");
+					context.addMessage("", errorMessage);
+					
 				}
 			} else {
 				livro = this.livroDAO.save(livro);
 
-				this.mensagem = "Cadastro realizado com sucesso.";
+				FacesMessage errorMessage = new FacesMessage("Cadastro realizado com sucesso!");
+				context.addMessage("", errorMessage);
 			}
 
 			return "CadastrarLivro";
@@ -172,13 +183,17 @@ public class LivroBean {
 	}
 
 	public String deletarItem(Livro livro) {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		
 		try {
 
 			// / Remove item
 			livroDAO.delete(livro);
 
 			// / Mensagem de exclusao efetuada
-			mensagem = "Exclusão realizada com sucesso.";
+			FacesMessage errorMessage = new FacesMessage("Exclusão realizada com sucesso!");
+			context.addMessage("", errorMessage);
 
 			this.listar();
 

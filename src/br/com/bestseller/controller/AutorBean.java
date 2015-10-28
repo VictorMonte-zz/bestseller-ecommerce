@@ -3,7 +3,9 @@ package br.com.bestseller.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import br.com.bestseller.dao.AutorDAO;
 import br.com.bestseller.model.Autor;
@@ -56,12 +58,14 @@ public class AutorBean {
 	
 	public String cadastrar() {
 
-		try {
-			
-			this.mensagem = "Cadastro realizado com sucesso";
-
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		try {			
 			// / Cadastrar autor
 			autor = this.autorDAO.save(autor);
+			
+			FacesMessage errorMessage = new FacesMessage("Cadastro realizado com sucesso!");
+			context.addMessage("", errorMessage);
 
 			this.listar();
 
@@ -98,13 +102,17 @@ public class AutorBean {
 	}
 	
 	public String deletarItem(Autor autor){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		
 		try {
 			
 			/// Remove item
 			autorDAO.delete(autor);
 			
 			/// Mensagem de exclusao efetuada
-			mensagem = "Exclusão realizada com sucesso.";
+			FacesMessage errorMessage = new FacesMessage("Exclusão realizada com sucesso!");
+			context.addMessage("", errorMessage);
 					
 			this.listar();
 			
@@ -116,6 +124,8 @@ public class AutorBean {
 
 	public String atualizar()
 	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		
 		try {
 			
 			for (Autor autor : listaAutor) {
@@ -124,7 +134,8 @@ public class AutorBean {
 				}				
 			}
 			
-			this.mensagem = "Atualização Realizada com sucesso.";
+			FacesMessage errorMessage = new FacesMessage("Atualização realizada com sucesso!");
+			context.addMessage("", errorMessage);
 			
 			this.listar();
 			

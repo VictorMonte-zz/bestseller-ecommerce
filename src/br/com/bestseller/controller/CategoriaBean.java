@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.bestseller.dao.CategoriaDAO;
 import br.com.bestseller.model.Categoria;
@@ -53,13 +55,17 @@ public class CategoriaBean implements Serializable {
 	}
 
 	public String cadastrar() {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
 
 		try {
 
 			// / Cadastrar categoria
 			categoria = this.categoriaDAO.save(categoria);
-			this.mensagem = "Cadastro realizado com sucesso";
-
+			
+			FacesMessage errorMessage = new FacesMessage("Cadastro realizado com sucesso!");
+			context.addMessage("", errorMessage);
+			
 			this.listar();
 
 		} catch (Exception e) {
@@ -96,13 +102,17 @@ public class CategoriaBean implements Serializable {
 	}
 	
 	public String deletarItem(Categoria categoria){
-		try {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		try {			
 			
 			/// Remove item
 			categoriaDAO.delete(categoria);
 			
 			/// Mensagem de exclusao efetuada
-			mensagem = "Exclusão realizada com sucesso.";
+			FacesMessage errorMessage = new FacesMessage("Exclusão realizada com sucesso!");
+			context.addMessage("", errorMessage);
 					
 			this.listar();
 			
@@ -114,15 +124,19 @@ public class CategoriaBean implements Serializable {
 
 	public String atualizar()
 	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		
 		try {
 			
 			for (Categoria categoria : listaCategoria) {
 				if (categoriaDAO.update(categoria) == false) {
-					this.mensagem = "Erro ao atualizar";
+					FacesMessage errorMessage = new FacesMessage("Erro ao atualizar item!");
+					context.addMessage("", errorMessage);
 				}				
 			}
 			
-			this.mensagem = "Atualização Realizada com sucesso.";
+			FacesMessage errorMessage = new FacesMessage("Atualização realizada com sucesso!");
+			context.addMessage("", errorMessage);
 			
 			this.listar();
 			

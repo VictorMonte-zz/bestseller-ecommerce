@@ -94,15 +94,17 @@
 				<c:otherwise>
 					<h:form id="FormularioLogin" class="navbar-form navbar-right">
 						<div style="float:left;z-index:9999">
-							<h:messages id=	"msgLogin" style="color:red"></h:messages>							
+							<h:message for="txtLogin_frmLogin" style="color:red"></h:message>
+							<br />
+							<h:message for="txtSenha_frmLogin" style="color:red"></h:message>							
 						</div>						
 			            <div class="form-group">							
-			              	<h:inputText a:placeholder="#{msg.login}" value="#{bestSellerBean.usuario.login}" 
+			              	<h:inputText id="txtLogin_frmLogin" a:placeholder="#{msg.login}" value="#{bestSellerBean.usuario.login}" 
 			              	styleClass="form-control" required="true" requiredMessage="#{msg.loginInvalido}">
 			              	</h:inputText>
 			            </div>
 			            <div class="form-group">				              
-				              <h:inputSecret a:placeholder="#{msg.senha}" value="#{bestSellerBean.usuario.senha}"
+				              <h:inputSecret id="txtSenha_frmLogin" a:placeholder="#{msg.senha}" value="#{bestSellerBean.usuario.senha}"
 				               styleClass="form-control" required="true" requiredMessage="#{msg.senhaInvalida}">
 				              </h:inputSecret>
 			            </div>			            		            
@@ -127,27 +129,40 @@
 
                 <!-- Form Register -->
                 <h:form>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">                        
-                        <h:outputLabel value="#{msg.nomeCompletoCadastroUsuario}" ></h:outputLabel>                        
-                        <h:inputText styleClass="form-control" value="#{bestSellerBean.usuario.nome}"
-                        required="true" requiredMessage="#{msg.nomeRequiridoCadastroUsuario}"></h:inputText><br clear="all"/>
-                    </div>                   
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <h:outputLabel value="#{msg.loginCadastroUsuario}" ></h:outputLabel>                        
-                        <h:inputText styleClass="form-control" value="#{bestSellerBean.usuario.login}"
-                        required="true" requiredMessage="#{msg.loginRequiridoCadastroUsuario}"></h:inputText><br clear="all"/>
+                	<div class="row">
+	                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">   	                                        
+	                        <h:outputLabel value="#{msg.nomeCompletoCadastroUsuario}" ></h:outputLabel>                        
+	                        <h:inputText id="txtNomeCompleto" styleClass="form-control" value="#{bestSellerBean.usuario.nome}"
+	                        required="true" requiredMessage="#{msg.nomeRequiridoCadastroUsuario}"></h:inputText><br clear="all"/>
+	                    </div>                   
+	                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">   	                                        
+	                        <h:outputLabel value="#{msg.emailCadastroUsuario}"></h:outputLabel>                        
+	                        <h:inputText id="txtEmail" styleClass="form-control" value="#{bestSellerBean.usuario.email}"
+	                        required="true" requiredMessage="#{msg.emailRequiridoCadastroUsuario}"
+	                        validator="#{adminBean.validateEmail}"></h:inputText><br clear="all"/>
+	                    </div>
+	                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
+	                        <h:outputLabel value="#{msg.loginCadastroUsuario}" ></h:outputLabel>                        
+	                        <h:inputText id="txtLogin" styleClass="form-control" value="#{bestSellerBean.usuario.login}"
+	                        required="true" requiredMessage="#{msg.loginRequiridoCadastroUsuario}"></h:inputText><br clear="all"/>
+	                    </div>
+	                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
+	                        <h:outputLabel value="#{msg.senhaCadastroUsuario}" ></h:outputLabel>                        
+	                        <h:inputSecret id="txtSenha" styleClass="form-control" value="#{bestSellerBean.usuario.senha}"
+	                        required="true" requiredMessage="#{msg.senhaRequiridoCadastroUsuario}"></h:inputSecret><br clear="all"/>
+	                    </div>  
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <h:outputLabel value="#{msg.senhaCadastroUsuario}" ></h:outputLabel>                        
-                        <h:inputSecret styleClass="form-control" value="#{bestSellerBean.usuario.senha}"
-                        required="true" requiredMessage="#{msg.senhaRequiridoCadastroUsuario}"></h:inputSecret><br clear="all"/>
-                    </div>  
                     
-                    <h:messages style="color:red"></h:messages>
                                       
                     <div class="clearfix">                                       
                     	<h:commandButton styleClass="btn btn-danger" value="#{msg.botaoCadastrarUsuario}" action="#{bestSellerBean.cadastrar}"></h:commandButton>
                    	</div>
+                   	
+                   	<h:message for="txtNomeCompleto" style="color:red"></h:message><br />
+                   	<h:message for="txtEmail" style="color:red"></h:message><br />
+                   	<h:message for="txtLogin" style="color:red"></h:message><br />
+                   	<h:message for="txtSenha" style="color:red"></h:message>
+                   	
                 </h:form>
                 <!-- End Form Register -->
             </div>

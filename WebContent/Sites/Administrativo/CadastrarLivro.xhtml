@@ -236,9 +236,7 @@
 										<h:outputLabel value="Data de Publicação"></h:outputLabel>
 										<h:inputText styleClass="form-control"
 											a:placeholder="Data de Publicação" value="#{livroBean.livro.dataPublicacao}"
-											 required="true" requiredMessage="Necessário a data de públicão do livro"
-											 converterMessage="Tipo de data de publicação inválida.">
-											 	<f:convertDateTime type="date" pattern="dd/MM/yyyy"></f:convertDateTime>
+											 required="true" requiredMessage="Necessário a data de públicão do livro">											 	
 											 </h:inputText>
 									</div>
 									<div class="form-group">
@@ -294,17 +292,15 @@
     										<f:selectItems value="#{livroBean.listaCategoria}" var="categoria" itemValue="#{categoria.id}" itemLabel="#{categoria.nome}" />
 										</h:selectOneMenu>
 									</div>
-								</div>
-								
-								<h:messages style="color:red"></h:messages>
+								</div>																
 
 								<div class="box-footer">
 									<div class="pull-right">
 										<h:commandButton value="Salvar" styleClass="btn btn-primary" action="#{livroBean.cadastrar}" />
 									</div>
-									<c:if test="#{livroBean.mensagem != ''}">
-										<h:outputText value="#{livroBean.mensagem}"></h:outputText>
-									</c:if>	
+									
+								<h:messages style="color:red"></h:messages>
+								
 								</div>
 							</h:form>
 						</div>

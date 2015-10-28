@@ -275,9 +275,8 @@
 										<h:commandButton value="Salvar" styleClass="btn btn-primary" 
 										action="#{editoraBean.cadastrar}" />
 									</div>
-									<c:if test="#{editoraBean.mensagem != ''}">
-										<h:outputText value="#{editoraBean.mensagem}"></h:outputText>
-									</c:if>
+									
+								<h:messages style="color:red"></h:messages>
 								</div>								
 								
 							</h:form>

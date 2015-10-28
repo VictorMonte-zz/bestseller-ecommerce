@@ -219,16 +219,13 @@
 									</div>									
 								</div>
 								
-								<h:messages style="color:red"></h:messages>
-
 								<div class="box-footer">
 									<div class="pull-right">
 										<h:commandButton value="Salvar" styleClass="btn btn-primary" 
 										action="#{categoriaBean.cadastrar}" />
 									</div>
-									<c:if test="#{categoriaBean.mensagem != ''}">
-											<h:outputText value="#{categoriaBean.mensagem}"></h:outputText>
-									</c:if>
+									
+								<h:messages style="color:red"></h:messages>
 								</div>
 							</h:form>
 							

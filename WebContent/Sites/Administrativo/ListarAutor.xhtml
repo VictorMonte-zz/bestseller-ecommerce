@@ -258,9 +258,7 @@
 										<div class="pull-right">
 											<h:commandButton value="Salvar" action="#{autorBean.atualizar}" styleClass="btn btn-primary"></h:commandButton>
 										</div>								
-										<c:if test="#{autorBean.mensagem != ''}">
-											<h:outputText value="#{autorBean.mensagem}"></h:outputText>
-										</c:if>										
+										<h:messages style="color:red"></h:messages>										
 									</div>
 								</h:form>	
 							</div>

@@ -2,11 +2,15 @@ package br.com.bestseller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 import br.com.bestseller.dao.AutorDAO;
 import br.com.bestseller.dao.CategoriaDAO;
@@ -48,6 +52,13 @@ public class BestSellerBean {
 	private Double listaDesejosTotal;
 	private Double carrinhoTotal;
 	private String titulo;
+	private Pattern pattern;
+	private Matcher matcher;
+	
+	/* Constant */
+	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\." +
+			"[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*" +
+			"(\\.[A-Za-z]{2,})$";
 
 	public BestSellerBean() {
 
@@ -65,7 +76,8 @@ public class BestSellerBean {
 		this.autorDAO = new AutorDAO();
 		this.usuarioDAO = new UsuarioDAO();
 		this.listaDesejosDAO = new ListaDesejosDAO();
-
+		this.pattern = Pattern.compile(EMAIL_PATTERN);
+		
 		try {
 			/* Load all lists */
 			this.categorias = categoriaDAO.getAll();
@@ -489,5 +501,18 @@ public class BestSellerBean {
 		
 		return null;
 		
+	}
+
+	public void validateEmail(FacesContext context, UIComponent component, Object value)
+	{
+		matcher = pattern.matcher(value.toString());
+		if(!matcher.matches()){
+			
+			FacesMessage msg = 
+				new FacesMessage("E-mail validation failed.", 
+						"E-mail inválido.");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			throw new ValidatorException(msg);
+		}
 	}
 }
